@@ -1,5 +1,6 @@
 import Event, { HeaderCard } from "@/components/EventCards";
 import { Column, Row } from "@/components/Flex";
+import { Events } from "@/data/Events";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
 
       {/* Event Cards */}
       {/* TODO: make this responsive */}
-      <div className="hidden  mt-[10rem] m-8 md:flex flex-col justify-center items-center">
+      <div className="hidden mt-[10rem] m-8 md:flex flex-col justify-center items-center">
         <Row>
           <HeaderCard />
           <Column>
@@ -126,6 +127,13 @@ export default function Home() {
             </Row>
           </Column>
         </Row>
+      </div>
+
+      <div className="sm:hidden flex flex-row flex-wrap justify-center items-center mt-[10rem] m-8">
+        <HeaderCard />
+        {Events.map(({ name, image }, i) => (
+          <Event key={i} text={name} image={image} className="rounded-2xl" />
+        ))}
       </div>
     </>
   );
