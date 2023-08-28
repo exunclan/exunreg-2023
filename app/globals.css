@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.button-background {
+  background: linear-gradient(180deg, #37baf2 0%, #2977f5 100%);
+  border-radius: 0.4rem;
+  color: white;
+  padding: 0.5rem 0.75rem;
+}
+
+.header-card {
+  background: linear-gradient(180deg, #37baf2 0%, #2977f5 100%);
+}
