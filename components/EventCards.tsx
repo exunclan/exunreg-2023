@@ -20,7 +20,7 @@ export default function Card({ text, image, className, long }: CardParams) {
     setShowModal(false);
 
     return () => unlockScroll();
-  });
+  }, []);
   useEffect(() => {
     showModal ? lockScroll() : unlockScroll();
   }, [showModal]);
