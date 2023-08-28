@@ -20,7 +20,6 @@ export default function Home() {
       </div>
 
       {/* Event Cards */}
-      {/* TODO: make this responsive */}
       <div className="hidden mt-[10rem] m-8 md:flex flex-col justify-center items-center">
         <Row>
           <HeaderCard />
@@ -129,11 +128,13 @@ export default function Home() {
         </Row>
       </div>
 
-      <div className="sm:hidden flex flex-row flex-wrap justify-center items-center mt-[10rem] m-8">
+      <div className="sm:hidden flex flex-col justify-center items-center mt-[10rem] m-8">
         <HeaderCard />
-        {Events.map(({ name, image }, i) => (
-          <Event key={i} text={name} image={image} className="rounded-2xl" />
-        ))}
+        <div className="flex flex-row flex-wrap justify-center items-center ">
+          {Events.map(({ name, image }, i) => (
+            <Event key={i} text={name} image={image} className="rounded-2xl" />
+          ))}
+        </div>
       </div>
     </>
   );
