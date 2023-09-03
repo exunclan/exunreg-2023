@@ -2,8 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Chivo } from "next/font/google";
 
-import Navbar from "@/components/Navbar";
-
 const chivo = Chivo({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,10 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={chivo.className}>
-        <Navbar />
-        {children}
-      </body>
+      <body className={chivo.className}>{children}</body>
     </html>
   );
 }
