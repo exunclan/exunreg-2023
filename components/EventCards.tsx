@@ -123,9 +123,7 @@ export function Modal({
 
             <div className="flex flex-row w-full items-end justify-end  my-5">
               <div className="text-text font-medium text-md mx-5 cursor-pointer">
-                <Link href={`/events#${name.split(" ").join()}`}>
-                  Read more
-                </Link>
+                <a href={`/events#${name.split(" ").join()}`}>Read more</a>
               </div>
             </div>
           </div>
