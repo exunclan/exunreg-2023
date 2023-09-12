@@ -2,11 +2,10 @@
 
 import { Card, HeaderCard } from "@/components/EventCards";
 import { Column, Row } from "@/components/Flex";
-import EventData from "@/util/data/Events";
+import { fetchEvents } from "@/util/data/Events";
 
-export default async () => {
-  const Events = await EventData();
-
+export default async function HomePage() {
+  const Events = await fetchEvents();
   return (
     <>
       {/*  Hero */}
@@ -164,4 +163,4 @@ export default async () => {
       </div>
     </>
   );
-};
+}

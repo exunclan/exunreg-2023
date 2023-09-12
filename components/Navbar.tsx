@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -37,7 +36,7 @@ export default function Navbar() {
     <>
       {/* Tablet/PC view */}
       <div className="hidden sm:flex flex-row justify-between p-8 items-center">
-        <Link href="/">
+        <a href="/">
           <Image
             src="/logo.png"
             alt="Exun Clan"
@@ -45,7 +44,7 @@ export default function Navbar() {
             height="74"
             className="mx-3"
           />
-        </Link>
+        </a>
         <div className="flex flex-row items-center justify-center">
           {Links.map((x, i) => (
             <div
@@ -54,7 +53,7 @@ export default function Navbar() {
                 x.background && "button-background"
               }`}
             >
-              <Link href={x.link}>{x.name}</Link>
+              <a href={x.link}>{x.name}</a>
             </div>
           ))}
         </div>
@@ -124,7 +123,7 @@ const MobileNavbar = ({
                 background && "button-background"
               }`}
             >
-              <Link href={link}>{name}</Link>
+              <a href={link}>{name}</a>
             </div>
           ))}
         </ul>

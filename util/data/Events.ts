@@ -47,20 +47,19 @@ interface IData extends Omit<IEvent, "image"> {
 }
 
 // Fetch the data from Sanity
-const data = async (): Promise<IEvent[]> =>
-  await client.fetch<IData[]>(`*[_type=="event"]`).then((res) =>
-    res.map((x) => {
-      return {
-        description: x.description,
-        registrations: x.registrations,
-        classes: x.classes,
-        name: x.name,
-        participants: x.participants,
-        summary: x.summary,
-        independant: x.independant,
-        image: Images[x.name],
-      };
-    })
-  );
 
-export default data;
+export const fetchEvents = async (): Promise<IEvent[]> => {
+  const data = await client.fetch<IData[]>(`*[_type=="event"]`);
+  return data.map((x) => {
+    return {
+      description: x.description,
+      registrations: x.registrations,
+      classes: x.classes,
+      name: x.name,
+      participants: x.participants,
+      summary: x.summary,
+      independant: x.independant,
+      image: Images[x.name],
+    };
+  });
+};

@@ -22,10 +22,10 @@ export function Card({ text, image, className, long, Events }: CardParams) {
     setShowModal(false);
 
     return () => unlockScroll();
-  }, []);
+  }, [unlockScroll]);
   useEffect(() => {
     showModal ? lockScroll() : unlockScroll();
-  }, [showModal]);
+  }, [showModal, lockScroll, unlockScroll]);
 
   let data = Events.filter((x) => x.name === text)[0];
   // console.log(data);
