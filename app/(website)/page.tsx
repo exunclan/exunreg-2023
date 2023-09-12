@@ -58,7 +58,7 @@ export default async () => {
               <Card
                 Events={Events}
                 text="Build"
-                image="/build.svg"
+                image="/Build.svg"
                 className="rounded-l-max"
                 long
               />
