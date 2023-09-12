@@ -1,3 +1,7 @@
+/**
+ * Event card on the home screen
+ */
+
 "use client";
 
 import Image from "next/image";

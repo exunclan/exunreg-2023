@@ -1,3 +1,7 @@
+/**
+ * An event's section on the `/events` route
+ */
+
 "use client";
 
 import Image from "next/image";

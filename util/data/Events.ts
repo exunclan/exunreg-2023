@@ -1,3 +1,7 @@
+/**
+ * Function to fetch the data from Sanity
+ */
+
 import { createClient } from "next-sanity";
 
 const client = createClient({

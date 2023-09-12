@@ -1,3 +1,7 @@
+/**
+ * Site-wide Navbar (includes a different component for Mobile view)
+ */
+
 "use client";
 
 import Image from "next/image";

@@ -8,7 +8,7 @@ export default async function HomePage() {
   const Events = await fetchEvents();
   return (
     <>
-      {/*  Hero */}
+      {/* Hero */}
       <div className="h-[75vh] w-full flex flex-col justify-center items-center">
         <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
           The biggest tech symposium of India
@@ -22,7 +22,7 @@ export default async function HomePage() {
         </div>
       </div>
 
-      {/* Event Cards */}
+      {/* Event Cards - Desktop */}
       <div className="hidden mt-[10rem] m-8 md:flex flex-col justify-center items-center">
         <Row>
           <HeaderCard />
@@ -147,6 +147,7 @@ export default async function HomePage() {
         </Row>
       </div>
 
+      {/* Event Cards - Mobile */}
       <div className="sm:hidden flex flex-col justify-center items-center mt-[10rem] m-8">
         <HeaderCard />
         <div className="flex flex-row flex-wrap justify-center items-center ">
