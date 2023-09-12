@@ -6,6 +6,7 @@ export default function EventDescription({
   name,
   classes,
   participants,
+  teams,
   independant,
   registrations,
   image,
@@ -14,6 +15,7 @@ export default function EventDescription({
   name: string;
   classes: string;
   participants: number;
+  teams: number;
   independant: boolean;
   registrations: boolean;
   image: string;
@@ -30,15 +32,21 @@ export default function EventDescription({
           <div className="text-sub text-lg">
             Open for classes <span className="font-medium">{classes}</span>{" "}
             <br />
-            No. of teams per school:{" "}
+            Maximum teams per school:{" "}
+            <span className="font-medium">{teams}</span> <br />
+            Maximum participants per team:{" "}
             <span className="font-medium">{participants}</span> <br />
             Indepependant Registration:{" "}
             <span className="font-medium">
               {independant ? "Allowed" : "Not Allowed"} <br />
             </span>
-            Registration:{" "}
+            Registrations:{" "}
             <span className="font-medium">
-              {registrations ? "Enabled" : "Closed"}
+              {registrations ? (
+                "Enabled"
+              ) : (
+                <span className="text-red-500">Closed</span>
+              )}
             </span>
           </div>
         </div>

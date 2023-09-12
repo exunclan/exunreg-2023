@@ -22,6 +22,11 @@ export default defineType({
       type: "number",
     }),
     defineField({
+      name: "teams",
+      title: "Max. number of teams",
+      type: "number",
+    }),
+    defineField({
       name: "independant",
       title: "Independant registrations",
       type: "boolean",
