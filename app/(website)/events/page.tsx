@@ -1,19 +1,22 @@
-import { Events } from "@/data/Events";
+"use client";
+
+import Events from "@/util/data/Events";
 import Image from "next/image";
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const data = await Events();
   return (
     <div className="my-[4rem] mx-[9rem]">
       <div className="text-main text-6xl font-bold">Events</div>
       <div>
-        {Events.map(
+        {data.map(
           (
             {
               name,
               classes,
               participants,
               independant,
-              registration,
+              registrations,
               image,
               description,
             },
@@ -30,11 +33,18 @@ export default function EventsPage() {
                 <div className="flex flex-col justify-center items-start">
                   <div className="text-sub font-bold text-4xl my-4">{name}</div>
                   <div className="text-sub text-lg">
-                    Open for classes {classes} <br />
-                    No. of teams per school: {participants} <br />
+                    Open for classes{" "}
+                    <span className="font-medium">{classes}</span> <br />
+                    No. of teams per school:{" "}
+                    <span className="font-medium">{participants}</span> <br />
                     Indepependant Registration:{" "}
-                    {independant ? "Allowed" : "Not Allowed"} <br />
-                    Registration: {registration ? "Enabled" : "Closed"}
+                    <span className="font-medium">
+                      {independant ? "Allowed" : "Not Allowed"} <br />
+                    </span>
+                    Registration:{" "}
+                    <span className="font-medium">
+                      {registrations ? "Enabled" : "Closed"}
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-center items-center">

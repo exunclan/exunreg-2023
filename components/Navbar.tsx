@@ -37,13 +37,15 @@ export default function Navbar() {
     <>
       {/* Tablet/PC view */}
       <div className="hidden sm:flex flex-row justify-between p-8 items-center">
-        <Image
-          src="/logo.png"
-          alt="Exun Clan"
-          width="185"
-          height="74"
-          className="mx-3"
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="Exun Clan"
+            width="185"
+            height="74"
+            className="mx-3"
+          />
+        </Link>
         <div className="flex flex-row items-center justify-center">
           {Links.map((x, i) => (
             <div

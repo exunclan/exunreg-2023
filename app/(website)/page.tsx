@@ -1,8 +1,12 @@
-import Event, { HeaderCard } from "@/components/EventCards";
-import { Column, Row } from "@/components/Flex";
-import { Events } from "@/data/Events";
+"use client";
 
-export default function Home() {
+import { Card, HeaderCard } from "@/components/EventCards";
+import { Column, Row } from "@/components/Flex";
+import EventData from "@/util/data/Events";
+
+export default async () => {
+  const Events = await EventData();
+
   return (
     <>
       {/*  Hero */}
@@ -25,29 +29,34 @@ export default function Home() {
           <HeaderCard />
           <Column>
             <Row>
-              <Event
+              <Card
+                Events={Events}
                 text="Sudocrypt"
                 image="/sudocrypt.svg"
                 className="rounded-b-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="Locus"
                 image="/locus.svg"
                 className="rounded-b-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="exML"
                 image="/exML.svg"
                 className="rounded-se-max rounded-es-max"
               />
             </Row>
             <Row>
-              <Event
+              <Card
+                Events={Events}
                 text="Group Discussion"
                 image="/GD.svg"
                 className="rounded-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="Build"
                 image="/build.svg"
                 className="rounded-l-max"
@@ -57,22 +66,26 @@ export default function Home() {
           </Column>
         </Row>
         <Row>
-          <Event
+          <Card
+            Events={Events}
             text="Competitive Programming"
             image="/CP.svg"
             className="rounded-r-max"
           />
-          <Event
+          <Card
+            Events={Events}
             text="Robotics"
             image="/robotics.svg"
             className="rounded-max"
           />
-          <Event
+          <Card
+            Events={Events}
             text="SpaceTech"
             image="/Spacetech.svg"
             className="rounded-max"
           />
-          <Event
+          <Card
+            Events={Events}
             text="Hardware"
             image="/hardware.svg"
             className="rounded-l-max"
@@ -80,19 +93,22 @@ export default function Home() {
         </Row>
         <Row>
           <Column>
-            <Event
+            <Card
+              Events={Events}
               text="Surprise"
               image="/surprise.svg"
               className="rounded-r-max"
               long
             />
             <Row>
-              <Event
+              <Card
+                Events={Events}
                 text="Crossword"
                 image="cross.svg"
                 className="rounded-se-max rounded-es-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="Girls in Tech"
                 image="girls in tech.svg"
                 className="rounded-t-max"
@@ -101,24 +117,28 @@ export default function Home() {
           </Column>
           <Column>
             <Row>
-              <Event
+              <Card
+                Events={Events}
                 text="Gaming"
                 image="/gaming.svg"
                 className="rounded-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="Junior Quiz"
                 image="/junior quiz.svg"
                 className="rounded-l-max"
               />
             </Row>
             <Row>
-              <Event
+              <Card
+                Events={Events}
                 text="Open Quiz"
                 image="/open quiz.svg"
                 className="rounded-t-max"
               />
-              <Event
+              <Card
+                Events={Events}
                 text="CubXL"
                 image="/cubxl.svg"
                 className="rounded-ss-max rounded-ee-max"
@@ -132,10 +152,16 @@ export default function Home() {
         <HeaderCard />
         <div className="flex flex-row flex-wrap justify-center items-center ">
           {Events.map(({ name, image }, i) => (
-            <Event key={i} text={name} image={image} className="rounded-2xl" />
+            <Card
+              Events={Events}
+              key={i}
+              text={name}
+              image={image}
+              className="rounded-2xl"
+            />
           ))}
         </div>
       </div>
     </>
   );
-}
+};

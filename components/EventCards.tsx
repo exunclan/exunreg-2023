@@ -3,16 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Events } from "@/data/Events";
-import { useScrollLock } from "@/util/use-scroll-lock";
+import { useScrollLock } from "@/util/hooks/use-scroll-lock";
+import { IEvent } from "@/util/data/Events";
 
 type CardParams = {
   text: string;
   image: string;
   className?: string;
   long?: boolean;
+  Events: IEvent[];
 };
-export default function Card({ text, image, className, long }: CardParams) {
+
+export function Card({ text, image, className, long, Events }: CardParams) {
   const [showModal, setShowModal] = useState(false);
   const [lockScroll, unlockScroll] = useScrollLock();
 
@@ -24,6 +26,9 @@ export default function Card({ text, image, className, long }: CardParams) {
   useEffect(() => {
     showModal ? lockScroll() : unlockScroll();
   }, [showModal]);
+
+  let data = Events.filter((x) => x.name === text)[0];
+  // console.log(data);
 
   return (
     <>
@@ -52,7 +57,8 @@ export default function Card({ text, image, className, long }: CardParams) {
       {showModal && (
         <Modal
           name={text}
-          description={Events.filter((x) => x.name === text)[0].summary}
+          description={data ? data.summary : "No summary"}
+          // description={"abc"}
           close={() => setShowModal(false)}
         />
       )}
@@ -72,7 +78,7 @@ export function HeaderCard() {
   );
 }
 
-function Modal({
+export function Modal({
   name,
   description,
   close,
