@@ -27,8 +27,8 @@ export default defineType({
       type: "number",
     }),
     defineField({
-      name: "independant",
-      title: "Independant registrations",
+      name: "independent",
+      title: "Independent registrations",
       type: "boolean",
     }),
     defineField({

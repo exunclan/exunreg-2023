@@ -39,7 +39,7 @@
 | `classes` | `string` | Classes eligible for the event | 
 | `teams` | `number` |  Max. teams per school |
 | `participants` | `number` | Max. participants per team
-| `independant` | `boolean` | Independant registratins |
+| `independent` | `boolean` | Independent registrations |
 | `registrations` | `boolean` | Registrations enabled | 
 | `summary` | `string` | Summary of the event for the modals |
 | `description` | `string[]` | Description of the event |

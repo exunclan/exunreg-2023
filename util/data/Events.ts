@@ -35,7 +35,7 @@ export interface IEvent {
   classes: string;
   participants: number;
   teams: number;
-  independant: boolean;
+  independent: boolean;
   registrations: boolean;
   image: string;
   summary: string;
@@ -64,7 +64,7 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
       participants: x.participants,
       teams: x.teams,
       summary: x.summary,
-      independant: x.independant,
+      independent: x.independent,
       image: Images[x.name],
     };
   });

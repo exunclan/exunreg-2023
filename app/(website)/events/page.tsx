@@ -17,7 +17,7 @@ export default async function EventsPage() {
               classes,
               participants,
               teams,
-              independant,
+              independent,
               registrations,
               image,
               description,
@@ -30,7 +30,7 @@ export default async function EventsPage() {
               classes={classes}
               participants={participants}
               teams={teams}
-              independant={independant}
+              independent={independent}
               registrations={registrations}
               image={image}
               description={description}
