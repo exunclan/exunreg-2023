@@ -12,7 +12,7 @@ const Images: { [key: string]: string } = {
   Locus: "/locus.svg",
   exML: "/exML.svg",
   "Group Discussion": "/GD.svg",
-  Build: "/build.svg",
+  Build: "/Build.svg",
   "Competitive Programming": "/CP.svg",
   Robotics: "/robotics.svg",
   SpaceTech: "/Spacetech.svg",
