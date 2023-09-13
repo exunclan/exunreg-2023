@@ -26,13 +26,15 @@ export default function EventDescription({
   description: string[];
 }) {
   return (
-    <div className="flex flex-col justify-center items-start my-10">
-      <div
-        id={name.split(" ").join()}
-        className="flex flex-row justify-between items-center w-full"
-      >
-        <div className="flex flex-col justify-center items-start">
-          <div className="text-sub font-bold text-4xl my-4">{name}</div>
+    <div
+      id={name.split(" ").join()}
+      className="flex flex-col justify-center items-center md:items-start pt-10 md:my-10"
+    >
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center w-full">
+        <div className="flex flex-col justify-center items-center md:items-start">
+          <div className="text-sub font-bold text-3xl md:text-4xl my-4">
+            {name}
+          </div>
           <div className="text-sub text-lg">
             Open for classes <span className="font-medium">{classes}</span>{" "}
             <br />
@@ -60,7 +62,7 @@ export default function EventDescription({
             height={200}
             width={200}
             alt={name}
-            className="mr-6"
+            className="md:mr-6"
           />
         </div>
       </div>
@@ -73,6 +75,7 @@ export default function EventDescription({
           ))}
         </ul>
       </div>
+      <div className="md:hidden border-dashed border border-gray-300 w-2/3 my-2"></div>
     </div>
   );
 }

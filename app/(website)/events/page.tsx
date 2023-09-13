@@ -7,8 +7,8 @@ export default async function EventsPage() {
   const Events = await fetchEvents();
 
   return (
-    <div className="my-[4rem] mx-[9rem]">
-      <div className="text-main text-6xl font-bold">Events</div>
+    <div className="my-[4rem] mx-[2rem] md:mx-[9rem]">
+      <div className="text-main text-5xl md:text-6xl font-bold">Events</div>
       <div>
         {Events.map(
           (
