@@ -1,7 +1,10 @@
+/**
+ * Site-wide Navbar (includes a different component for Mobile view)
+ */
+
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -19,8 +22,8 @@ const Links: { name: string; link: string; background?: boolean }[] = [
     link: "/contact",
   },
   {
-    name: "Register",
-    link: "/register",
+    name: "Dashboard",
+    link: "/dashboard",
     background: true,
   },
 ];
@@ -37,13 +40,15 @@ export default function Navbar() {
     <>
       {/* Tablet/PC view */}
       <div className="hidden sm:flex flex-row justify-between p-8 items-center">
-        <Image
-          src="/logo.png"
-          alt="Exun Clan"
-          width="185"
-          height="74"
-          className="mx-3"
-        />
+        <a href="/">
+          <Image
+            src="/logo.png"
+            alt="Exun Clan"
+            width="185"
+            height="74"
+            className="mx-3"
+          />
+        </a>
         <div className="flex flex-row items-center justify-center">
           {Links.map((x, i) => (
             <div
@@ -52,7 +57,7 @@ export default function Navbar() {
                 x.background && "button-background"
               }`}
             >
-              <Link href={x.link}>{x.name}</Link>
+              <a href={x.link}>{x.name}</a>
             </div>
           ))}
         </div>
@@ -122,7 +127,7 @@ const MobileNavbar = ({
                 background && "button-background"
               }`}
             >
-              <Link href={link}>{name}</Link>
+              <a href={link}>{name}</a>
             </div>
           ))}
         </ul>

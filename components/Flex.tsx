@@ -1,3 +1,7 @@
+/**
+ * Flexbox utility components
+ */
+
 import React from "react";
 
 export function Row({

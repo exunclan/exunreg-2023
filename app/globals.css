@@ -6,6 +6,9 @@
   margin: 0;
   padding: 0;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 
 .button-background {
   background: linear-gradient(180deg, #37baf2 0%, #2977f5 100%);
