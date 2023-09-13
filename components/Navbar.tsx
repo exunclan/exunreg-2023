@@ -22,8 +22,8 @@ const Links: { name: string; link: string; background?: boolean }[] = [
     link: "/contact",
   },
   {
-    name: "Register",
-    link: "/register",
+    name: "Dashboard",
+    link: "/dashboard",
     background: true,
   },
 ];
