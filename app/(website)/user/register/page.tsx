@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { redirect } from "next/navigation";
 
 type FormData = {
   email: string;
@@ -35,6 +36,10 @@ export default function SignIn() {
         setError("Some error occured. Please try again later.");
         console.log(err);
       });
+
+    if (!error) {
+      redirect("/dashboard");
+    }
   });
 
   return (
@@ -55,10 +60,9 @@ export default function SignIn() {
         <div className="flex flex-col my-3">
           <label className="text-sm text-sub">Name</label>
           <input
-            type="email"
             required
             className="border border-sub rounded-md p-2 text-text"
-            {...register("email")}
+            {...register("name")}
           />
         </div>
 
