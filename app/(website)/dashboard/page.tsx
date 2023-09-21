@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export default function RegisterPage() {
   const { data: session, status } = useSession();
 
-  if (status === "authenticated") return <>Register</>;
+  if (status === "authenticated") return <>Dashboard</>;
   else if (status === "loading") return <>loading</>;
   else redirect("/user/signin");
 }
