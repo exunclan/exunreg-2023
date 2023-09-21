@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
     email: body.email,
     password: pass,
     name: body.name,
+    teams: {},
   });
   return new NextResponse(JSON.stringify(res));
 }
