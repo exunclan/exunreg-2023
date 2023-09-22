@@ -32,7 +32,6 @@ export function Card({ text, image, className, long, Events }: CardParams) {
   }, [showModal, lockScroll, unlockScroll]);
 
   let data = Events.filter((x) => x.name === text)[0];
-  // console.log(data);
 
   return (
     <>
