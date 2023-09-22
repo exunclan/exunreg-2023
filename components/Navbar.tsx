@@ -53,9 +53,7 @@ export default function Navbar() {
           {Links.map((x, i) => (
             <div
               key={i}
-              className={`text-sub mx-4 text-lg ${
-                x.background && "button-background"
-              }`}
+              className={`text-sub mx-4 text-lg ${x.background && "bg-main"}`}
             >
               <a href={x.link}>{x.name}</a>
             </div>
