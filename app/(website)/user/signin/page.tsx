@@ -27,6 +27,24 @@ export default function SignIn() {
 
     if (error) {
       setValue("password", "");
+      /* switch (error) {
+				case "account_not_found":
+					setError("Account does not exist. Please create a new one.");
+					setValue("email", "");
+					break;
+				case "incorrect_password":
+					setError("Wrong password. Please try again.");
+					break;
+				case "email_not_verified":
+					setError("The email has not yet been verified.");
+					break;
+				case "teacher_email_not_verified":
+					setError(
+						"The email of the Teacher Incharge has not yet been verified"
+					);
+					break;
+			} */
+
       if (error === "account_not_found") {
         setError("Account does not exist. Please create a new one.");
         setValue("email", "");
