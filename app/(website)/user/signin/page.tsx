@@ -32,6 +32,10 @@ export default function SignIn() {
         setValue("email", "");
       } else if (error === "incorrect_password") {
         setError("Wrong password. Please try again.");
+      } else if (error === "email_not_verified") {
+        setError("The email has not yet been verified.");
+      } else if (error === "teacher_email_not_verified") {
+        setError("The email of the Teacher Incharge has not yet been verified");
       }
     }
 

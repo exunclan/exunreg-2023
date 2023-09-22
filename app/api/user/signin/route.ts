@@ -19,6 +19,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  if (!user.emailVerified) {
+    return new NextResponse(
+      JSON.stringify({
+        error: "email_not_verified",
+      })
+    );
+  }
+
+  if (!user.teacherEmailVerified) {
+    return new NextResponse(
+      JSON.stringify({
+        error: "teacher_email_not_verified",
+      })
+    );
+  }
+
   const check = await brcypt.compare(password, user.password);
 
   if (check) {
