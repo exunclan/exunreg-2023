@@ -9,6 +9,8 @@ export async function POST(req: NextRequest) {
 
   const pass = await bcrypt.hash(body.password, 15);
 
+  // TODO: check for already existing users
+
   const res = await db.collection("users").insertOne({
     email: body.email,
     password: pass,

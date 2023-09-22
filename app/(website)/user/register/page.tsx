@@ -111,8 +111,11 @@ export default function SignIn() {
           </span>
         </div>
         <button
-          className="my-2 bg-main p-2 rounded-md text-white"
+          className={`my-2 ${
+            password === rePassword ? "bg-main" : "bg-text"
+          } p-2 rounded-md text-white`}
           type="submit"
+          disabled={password != rePassword}
         >
           Register
         </button>
