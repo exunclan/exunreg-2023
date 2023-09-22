@@ -1,10 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { encode, decode } from "next-auth/jwt";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import type { SessionStrategy } from "next-auth";
-
-import clientPromise from "@/util/data/Mongo";
 
 const authOptions = {
   session: {
@@ -63,7 +60,6 @@ const authOptions = {
       return session;
     },
   },
-  adapter: MongoDBAdapter(clientPromise),
 };
 
 const handler = NextAuth(authOptions);

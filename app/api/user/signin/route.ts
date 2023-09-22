@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import clientPromise from "@/util/data/Mongo";
+import client from "@/util/data/Mongo";
 import brcypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
-  const client = await clientPromise;
   const { email, password }: { email: string; password: string } =
     await req.json();
 

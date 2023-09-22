@@ -2,44 +2,49 @@
 
 import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   email: string;
   name: string;
   password: string;
   rePassword: string;
+  phone: string;
+  teacher: string;
+  teacherEmail: string;
+  principal: string;
+  address: string;
+  ncr: boolean;
 };
 
 export default function SignIn() {
   const { register, control, handleSubmit } = useForm<FormData>();
-  const [error, setError] = useState<string | null>();
+  const [error, setError] = useState<string | null>(null);
   const [password, rePassword] = useWatch({
     control,
     name: ["password", "rePassword"],
   });
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleSignIn = handleSubmit(async (data) => {
-    await fetch("/api/user/register", {
+    setError(null);
+    setLoading(true);
+
+    const res = await fetch("/api/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-        name: data.name,
-      }),
-    })
-      .then((res) => res.json())
-      .catch((err) => {
-        setError("Some error occured. Please try again later.");
-        console.log(err);
-      });
+      body: JSON.stringify(data),
+    }).then((res) => res.json());
 
-    if (!error) {
-      redirect("/dashboard");
-    }
+    if (res.error) {
+      if (res.error === "user_already_exists")
+        setError("User with the given email already exists.");
+    } else router.replace("/dashboard");
+
+    setLoading(false);
   });
 
   return (
@@ -58,7 +63,7 @@ export default function SignIn() {
         )}
 
         <div className="flex flex-col my-3">
-          <label className="text-sm text-sub">Name</label>
+          <label className="text-sm text-sub">Name of School</label>
           <input
             required
             className="border border-sub rounded-md p-2 text-text"
@@ -104,20 +109,78 @@ export default function SignIn() {
           />
         </div>
 
+        <div className="flex flex-col my-3">
+          <label className="text-sm text-sub">Contact Number</label>
+          <input
+            required
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("phone")}
+          />
+        </div>
+
+        <div className="flex flex-col my-3">
+          <label className="text-sm text-sub">Name of Teacher Incharge</label>
+          <input
+            required
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("teacher")}
+          />
+        </div>
+
+        <div className="flex flex-col my-3">
+          <label className="text-sm text-sub">
+            {"Email of Teacher Incharge"}
+          </label>
+          <input
+            type="email"
+            required
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("teacherEmail")}
+          />
+        </div>
+
+        <div className="flex flex-col my-3">
+          <label className="text-sm text-sub">Name of Principal</label>
+          <input
+            required
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("principal")}
+          />
+        </div>
+
+        <div className="flex flex-col my-3">
+          <label className="text-sm text-sub">School Address</label>
+          <input
+            required
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("address")}
+          />
+        </div>
+
+        <div className="flex flex-row justify-between my-3">
+          <label className="text-sm text-sub">Is your school in the NCR?</label>
+          <input
+            type="checkbox"
+            className="border border-sub rounded-md p-2 text-text"
+            {...register("ncr")}
+          />
+        </div>
+
         <div className="text-text self-end text-xs md:text-sm my-1">
           Already have an account?{" "}
           <span className="border-b border-dashed">
             <a href="/user/signin">Sign-in instead.</a>
           </span>
         </div>
+
         <button
           className={`my-2 ${
             password === rePassword ? "bg-main" : "bg-text"
           } p-2 rounded-md text-white`}
           type="submit"
-          disabled={password != rePassword}
+          disabled={password != rePassword || loading}
         >
-          Register
+          {loading ? "Loading..." : "Register"}
         </button>
       </form>
     </div>

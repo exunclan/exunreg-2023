@@ -13,8 +13,12 @@ type FormData = {
 export default function SignIn() {
   const { handleSubmit, register, setValue } = useForm<FormData>();
   const [error, setError] = useState<string | null>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSignIn = handleSubmit(async (data) => {
+    setError(null);
+    setLoading(true);
+
     const { error } = (await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -30,6 +34,8 @@ export default function SignIn() {
         setError("Wrong password. Please try again.");
       }
     }
+
+    setLoading(false);
   });
 
   return (
@@ -37,6 +43,7 @@ export default function SignIn() {
       <div className="text-4xl md:text-6xl text-main font-bold m-4">
         Sign In
       </div>
+
       <form
         onSubmit={handleSignIn}
         className="flex flex-col justify-start w-[80vw] md:w-1/3"
@@ -46,6 +53,7 @@ export default function SignIn() {
             {error}
           </div>
         )}
+
         <div className="flex flex-col my-3">
           <label className="text-sm text-sub">Email</label>
           <input
@@ -55,6 +63,7 @@ export default function SignIn() {
             {...register("email")}
           />
         </div>
+
         <div className="flex flex-col my-3">
           <label className="text-sm text-sub">Password</label>
           <input
@@ -64,6 +73,7 @@ export default function SignIn() {
             {...register("password")}
           />
         </div>
+
         <div className="text-text self-end text-xs md:text-sm my-1">
           Forgot Password?{" "}
           <span className="border-b border-dashed">
@@ -76,11 +86,13 @@ export default function SignIn() {
             <a href="/user/register">Create one.</a>
           </span>
         </div>
+
         <button
           className="my-2 bg-main p-2 rounded-md text-white"
+          disabled={loading}
           type="submit"
         >
-          Sign In
+          {loading ? "Loading..." : "Sign In"}
         </button>
       </form>
     </div>
