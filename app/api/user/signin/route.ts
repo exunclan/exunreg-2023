@@ -6,6 +6,7 @@ export async function POST(req: NextRequest) {
   const { email, password }: { email: string; password: string } =
     await req.json();
 
+  console.log(`email, pasword:`, email, password);
   const db = client.db("reg-2023");
   const user = await db.collection("users").findOne({
     email,

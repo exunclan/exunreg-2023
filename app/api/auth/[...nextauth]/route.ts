@@ -22,7 +22,6 @@ export const authOptions = {
       async authorize(credentials, _req) {
         // Logic executed when a user tries to singin
 
-        console.log(`creds: `, JSON.stringify(credentials));
         const user = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/user/signin`,
           {
@@ -36,6 +35,7 @@ export const authOptions = {
             }),
           }
         ).then((res) => res.json());
+        console.log(user);
 
         const { password, _id, team, ...filteredUser } = user;
 

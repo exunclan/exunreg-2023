@@ -20,7 +20,6 @@ export default function SignIn() {
     setError(null);
     setLoading(true);
 
-    console.log(data);
     const { error, url } = (await signIn("credentials", {
       email: data.email,
       password: data.password,
