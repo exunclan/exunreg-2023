@@ -21,9 +21,6 @@ export async function GET(req: NextRequest) {
   const usr = searchParams.get("user");
   const email = searchParams.get("email");
 
-  // Initialize db
-  const db = client.db("reg-2023");
-
   // Verify token
   jwt.verify(token!, process.env.JWT_SECRET!, (err, _) => {
     if (err) {
@@ -31,6 +28,9 @@ export async function GET(req: NextRequest) {
     }
 
     if (email == "email") {
+      // Initialize db
+      const db = client.db("reg-2023");
+
       const res = db.collection("users").updateOne(
         {
           _id: new ObjectId(usr!),
@@ -46,6 +46,9 @@ export async function GET(req: NextRequest) {
     }
 
     if (email == "teacher") {
+      // Initialize db
+      const db = client.db("reg-2023");
+
       const res = db.collection("users").updateOne(
         {
           _id: new ObjectId(usr!),
@@ -59,7 +62,10 @@ export async function GET(req: NextRequest) {
 
       return new NextResponse(JSON.stringify(res));
     }
+    return new NextResponse("verified");
   });
+
+  return new NextResponse("couldn't verify");
 }
 
 export async function POST(req: NextRequest) {
@@ -78,86 +84,86 @@ export async function POST(req: NextRequest) {
   const { email, teacherEmail } = await req.json();
 
   // Initialize nodemailer
-  const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASSWORD,
-    },
-  });
+  nodemailer.createTestAccount((err, acc) => {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: acc.user,
+        pass: acc.pass,
+      },
+    });
 
-  // Initialize db
-  const db = client.db("reg-2023");
+    // Initialize db
+    const db = client.db("reg-2023");
 
-  // Function to generate emailOptions
-  const emailOptions = (url: string, to: string) => {
-    return {
-      from: "Exunclan <exun@dpsrkp.net>",
-      to: to,
-      subject: "Verify Email",
-      html: `
+    // Function to generate emailOptions
+    const emailOptions = (url: string, to: string) => {
+      return {
+        from: "Exunclan <exun@dpsrkp.net>",
+        to: to,
+        subject: "Verify Email",
+        html: `
 			<p>Pls verify your email at <a href="${url}">${url}</a></p>
 			`,
+      };
     };
-  };
 
-  // Check if email is provided
-  if (email) {
-    const user = await db.collection("users").findOne({
-      email,
-    });
-
+    // Sign jwt token
     jwt.sign(
       {
-        user: email,
+        user: email + teacherEmail,
       },
       process.env.JWT_SECRET!,
       {
         expiresIn: "1hr",
       },
-      (err, token) => {
-        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
-          user!["_id"]
-        }&token=${token}&email=email`;
-
-        transporter.sendMail(emailOptions(url, email));
-
+      async (err, token) => {
         if (err) {
           return new Error(JSON.stringify(err));
         }
 
-        return new NextResponse("Verificaion email sent");
-      }
-    );
-  }
+        if (email) {
+          const user = await db.collection("users").findOne({
+            email,
+          });
 
-  // Check if teacherEmail is provided
-  if (teacherEmail) {
-    const user = await db.collection("users").findOne({
-      teacherEmail,
-    });
+          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
+            user!["_id"]
+          }&token=${token}&email=email`;
 
-    jwt.sign(
-      {
-        user: teacherEmail,
-      },
-      process.env.JWT_SECRET!,
-      {
-        expiresIn: "1hr",
-      },
-      (err, token) => {
-        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
-          user!["_id"]
-        }&token=${token}&email=teacher`;
+          transporter.sendMail(emailOptions(url, email), (err, _) => {
+            if (err) {
+              return new Error(JSON.stringify(err));
+            }
 
-        transporter.sendMail(emailOptions(url, teacherEmail));
-
-        if (err) {
-          return new Error(JSON.stringify(err));
+            console.log(nodemailer.getTestMessageUrl(_));
+          });
         }
 
-        return new NextResponse("Verificaion email sent");
+        if (teacherEmail) {
+          const user = await db.collection("users").findOne({
+            teacherEmail,
+          });
+
+          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
+            user!["_id"]
+          }&token=${token}&email=teacher`;
+
+          transporter.sendMail(emailOptions(url, email), (err, _) => {
+            if (err) {
+              return new Error(JSON.stringify(err));
+            }
+
+            console.log(nodemailer.getTestMessageUrl(_));
+          });
+        }
+
+        console.log(token);
       }
     );
-  }
+  });
+
+  return new NextResponse("Verificaion email sent");
 }
