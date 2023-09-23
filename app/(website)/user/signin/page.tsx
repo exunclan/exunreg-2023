@@ -3,7 +3,7 @@
 import { SignInResponse, signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   email: string;
@@ -14,30 +14,30 @@ export default function SignIn() {
   const { handleSubmit, register, setValue } = useForm<FormData>();
   const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleSignIn = handleSubmit(async (data) => {
     setError(null);
     setLoading(true);
 
-    const { error } = (await signIn("credentials", {
+    const { error, url } = (await signIn("credentials", {
       email: data.email,
       password: data.password,
-      callbackUrl: "/user/signin",
+      redirect: false,
+      callbackUrl: "/dashboard",
     })) as SignInResponse;
 
     if (error) {
       setValue("password", "");
-      if (error === "account_not_found") {
+      if (error === "account_not_found")
         setError("Account does not exist. Please create a new one.");
-        setValue("email", "");
-      } else if (error === "incorrect_password") {
+      else if (error === "incorrect_password")
         setError("Wrong password. Please try again.");
-      } else if (error === "email_not_verified") {
+      else if (error === "email_not_verified")
         setError("The email has not yet been verified.");
-      } else if (error === "teacher_email_not_verified") {
+      else if (error === "teacher_email_not_verified")
         setError("The email of the Teacher Incharge has not yet been verified");
-      }
-    }
+    } else router.replace(url!);
 
     setLoading(false);
   });
