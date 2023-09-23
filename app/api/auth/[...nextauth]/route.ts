@@ -22,6 +22,7 @@ export const authOptions = {
       async authorize(credentials, _req) {
         // Logic executed when a user tries to singin
 
+        console.log(`creds: `, JSON.stringify(credentials));
         const user = await fetch(
           `${process.env.NEXT_PUBLIC_URL}/api/user/signin`,
           {

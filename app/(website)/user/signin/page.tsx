@@ -20,6 +20,7 @@ export default function SignIn() {
     setError(null);
     setLoading(true);
 
+    console.log(data);
     const { error, url } = (await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -28,7 +29,6 @@ export default function SignIn() {
     })) as SignInResponse;
 
     if (error) {
-      console.log(error);
       setValue("password", "");
       if (error === "account_not_found")
         setError("Account does not exist. Please create a new one.");
@@ -38,6 +38,7 @@ export default function SignIn() {
         setError("The email has not yet been verified.");
       else if (error === "teacher_email_not_verified")
         setError("The email of the Teacher Incharge has not yet been verified");
+      else setError("Some unexpected error occured. Please try again later");
     } else router.replace(url!);
 
     setLoading(false);
