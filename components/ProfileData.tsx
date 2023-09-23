@@ -30,7 +30,7 @@ export default function ProfileData({ values }: { values: FormData }) {
   } | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSignIn = handleSubmit(async (data) => {
+  const handleUpdate = handleSubmit(async (data) => {
     setNotification(null);
     setLoading(true);
 
@@ -61,7 +61,7 @@ export default function ProfileData({ values }: { values: FormData }) {
       </div>
 
       <form
-        onSubmit={handleSignIn}
+        onSubmit={handleUpdate}
         className="flex flex-col justify-start w-[80vw] md:w-1/3"
       >
         {notification && (
