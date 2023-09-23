@@ -73,87 +73,99 @@ export async function POST(req: NextRequest) {
   const { email, teacherEmail } = await req.json();
 
   // Initialize nodemailer
+
+  /* // Test account for nodemailer
+  // Don't forget to uncomment the closing parenthesis on the createTestAccount function
   nodemailer.createTestAccount(async (_, acc) => {
     const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email",
+      host: "smtp.ethereal.email"
       port: 587,
       secure: false,
       auth: {
         user: acc.user,
-        pass: acc.pass,
+        pass: acc.pass
       },
     });
+  */
 
-    // Function to generate emailOptions
-    const emailOptions = (url: string, to: string) => {
-      return {
-        from: "Exunclan <exun@dpsrkp.net>",
-        to: to,
-        subject: "Verify Email",
-        html: `
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASSWORD,
+    },
+  });
+
+  // Function to generate emailOptions
+  const emailOptions = (url: string, to: string) => {
+    return {
+      from: "Exunclan <exun@dpsrkp.net>",
+      to: to,
+      subject: "Verify Email",
+      html: `
 			<p>Pls verify your email at <a href="${url}">${url}</a></p>
 			`,
-      };
     };
+  };
 
-    // Sign jwt token if email exists
-    if (email) {
-      jwt.sign(
-        {
-          email: email,
-          emailType: "email",
-        },
-        process.env.JWT_SECRET!,
-        {
-          expiresIn: "1hr",
-        },
-        (err, token) => {
+  // Sign jwt token if email exists
+  if (email) {
+    jwt.sign(
+      {
+        email: email,
+        emailType: "email",
+      },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: "1hr",
+      },
+      (err, token) => {
+        if (err) {
+          return new NextResponse(JSON.stringify(err));
+        }
+
+        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+
+        transporter.sendMail(emailOptions(url, email), (err, _) => {
           if (err) {
             return new NextResponse(JSON.stringify(err));
           }
 
-          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+          console.log(nodemailer.getTestMessageUrl(_));
+        });
+      }
+    );
+  }
 
-          transporter.sendMail(emailOptions(url, email), (err, _) => {
-            if (err) {
-              return new NextResponse(JSON.stringify(err));
-            }
-
-            console.log(nodemailer.getTestMessageUrl(_));
-          });
+  // Sign jwt token if teacherEmail exists
+  if (teacherEmail) {
+    jwt.sign(
+      {
+        email: teacherEmail,
+        emailType: "teacher",
+      },
+      process.env.JWT_SECRET!,
+      {
+        expiresIn: "1hr",
+      },
+      (err, token) => {
+        if (err) {
+          return new NextResponse(JSON.stringify(err));
         }
-      );
-    }
 
-    // Sign jwt token if teacherEmail exists
-    if (teacherEmail) {
-      jwt.sign(
-        {
-          email: teacherEmail,
-          emailType: "teacher",
-        },
-        process.env.JWT_SECRET!,
-        {
-          expiresIn: "1hr",
-        },
-        (err, token) => {
+        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+
+        transporter.sendMail(emailOptions(url, teacherEmail), (err, _) => {
           if (err) {
             return new NextResponse(JSON.stringify(err));
           }
 
-          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
-
-          transporter.sendMail(emailOptions(url, teacherEmail), (err, _) => {
-            if (err) {
-              return new NextResponse(JSON.stringify(err));
-            }
-
-            console.log(nodemailer.getTestMessageUrl(_));
-          });
-        }
-      );
-    }
-  });
+          console.log(nodemailer.getTestMessageUrl(_));
+        });
+      }
+    );
+  }
+  // });
 
   return new NextResponse("Verificaion email sent");
 }
