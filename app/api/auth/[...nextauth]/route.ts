@@ -35,7 +35,6 @@ export const authOptions = {
             }),
           }
         ).then((res) => res.json());
-        console.log(user);
 
         const { password, _id, team, ...filteredUser } = user;
 
