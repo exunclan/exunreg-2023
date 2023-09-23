@@ -2,38 +2,36 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import client from "@/util/data/Mongo";
-import { ObjectId } from "mongodb";
 
 export async function GET(req: NextRequest) {
-  /*
-    Method invoked when a user opens the verification link.
-
-    Check the JWT expiry and if the link is valid, set the `emailVerified` and
-    `teacherEmailVerified` fields to `true` in the database and redirect the user to
-    `/user/verified?user=[userid]&email=[school|teacher]`
-    
-    if expired link, redirect them to `/user/unverified?user=[userid]`
-  */
-
   // Get query params
   const searchParams = new URLSearchParams(new URL(req.url).search);
   const token = searchParams.get("token");
-  const usr = searchParams.get("user");
-  const email = searchParams.get("email");
+
+  let tokenValid = false;
 
   // Verify token
-  jwt.verify(token!, process.env.JWT_SECRET!, (err, _) => {
+  jwt.verify(token!, process.env.JWT_SECRET!, async (err, info) => {
     if (err) {
-      return new Error(JSON.stringify(err));
+      return new NextResponse(JSON.stringify(err));
     }
 
-    if (email == "email") {
+    tokenValid = true;
+
+    // Extract info
+    const decoded = info as { email: string; emailType: string };
+    const email = decoded["email"];
+    const emailType = decoded["emailType"];
+
+    // Check if emailType is email
+    if (emailType == "email") {
       // Initialize db
       const db = client.db("reg-2023");
 
-      const res = db.collection("users").updateOne(
+      // Update db
+      await db.collection("users").updateOne(
         {
-          _id: new ObjectId(usr!),
+          email: email,
         },
         {
           $set: {
@@ -41,17 +39,17 @@ export async function GET(req: NextRequest) {
           },
         }
       );
-
-      return new NextResponse(JSON.stringify(res));
     }
 
-    if (email == "teacher") {
+    // Check if emailType is teacher
+    if (emailType == "teacher") {
       // Initialize db
       const db = client.db("reg-2023");
 
-      const res = db.collection("users").updateOne(
+      // Update db
+      db.collection("users").updateOne(
         {
-          _id: new ObjectId(usr!),
+          teacherEmail: email,
         },
         {
           $set: {
@@ -59,32 +57,23 @@ export async function GET(req: NextRequest) {
           },
         }
       );
-
-      return new NextResponse(JSON.stringify(res));
     }
-    return new NextResponse("verified");
   });
 
-  return new NextResponse("couldn't verify");
+  // Check if token is valid
+  if (!tokenValid) {
+    return new NextResponse("Invalid token");
+  }
+
+  return new NextResponse("verified");
 }
 
 export async function POST(req: NextRequest) {
-  /*
-    Route called when a new user registers.
-    body: 
-      - email [email of the school]
-      - teacherEmail [email of the teacher incharge]
-
-    send an email to both with links to verify emails. 
-    use JWT to create tokens with an expiry of 1 hour 
-    the links will point to this route but calling the GET method 
-   */
-
   // Get email, teacherEmail
   const { email, teacherEmail } = await req.json();
 
   // Initialize nodemailer
-  nodemailer.createTestAccount((err, acc) => {
+  nodemailer.createTestAccount(async (_, acc) => {
     const transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
@@ -94,9 +83,6 @@ export async function POST(req: NextRequest) {
         pass: acc.pass,
       },
     });
-
-    // Initialize db
-    const db = client.db("reg-2023");
 
     // Function to generate emailOptions
     const emailOptions = (url: string, to: string) => {
@@ -110,59 +96,63 @@ export async function POST(req: NextRequest) {
       };
     };
 
-    // Sign jwt token
-    jwt.sign(
-      {
-        user: email + teacherEmail,
-      },
-      process.env.JWT_SECRET!,
-      {
-        expiresIn: "1hr",
-      },
-      async (err, token) => {
-        if (err) {
-          return new Error(JSON.stringify(err));
-        }
+    // Sign jwt token if email exists
+    if (email) {
+      jwt.sign(
+        {
+          email: email,
+          emailType: "email",
+        },
+        process.env.JWT_SECRET!,
+        {
+          expiresIn: "1hr",
+        },
+        (err, token) => {
+          if (err) {
+            return new NextResponse(JSON.stringify(err));
+          }
 
-        if (email) {
-          const user = await db.collection("users").findOne({
-            email,
-          });
-
-          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
-            user!["_id"]
-          }&token=${token}&email=email`;
+          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
           transporter.sendMail(emailOptions(url, email), (err, _) => {
             if (err) {
-              return new Error(JSON.stringify(err));
+              return new NextResponse(JSON.stringify(err));
             }
 
             console.log(nodemailer.getTestMessageUrl(_));
           });
         }
+      );
+    }
 
-        if (teacherEmail) {
-          const user = await db.collection("users").findOne({
-            teacherEmail,
-          });
+    // Sign jwt token if teacherEmail exists
+    if (teacherEmail) {
+      jwt.sign(
+        {
+          email: teacherEmail,
+          emailType: "teacher",
+        },
+        process.env.JWT_SECRET!,
+        {
+          expiresIn: "1hr",
+        },
+        (err, token) => {
+          if (err) {
+            return new NextResponse(JSON.stringify(err));
+          }
 
-          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?user=${
-            user!["_id"]
-          }&token=${token}&email=teacher`;
+          const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-          transporter.sendMail(emailOptions(url, email), (err, _) => {
+          transporter.sendMail(emailOptions(url, teacherEmail), (err, _) => {
             if (err) {
-              return new Error(JSON.stringify(err));
+              return new NextResponse(JSON.stringify(err));
             }
 
             console.log(nodemailer.getTestMessageUrl(_));
           });
         }
-
-        console.log(token);
-      }
-    );
+      );
+    }
   });
 
   return new NextResponse("Verificaion email sent");
