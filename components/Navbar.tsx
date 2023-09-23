@@ -8,32 +8,18 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const Links: { name: string; link: string; background?: boolean }[] = [
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "Events",
-    link: "/events",
-  },
-  {
-    name: "Contact",
-    link: "/contact",
-  },
-  {
-    name: "Dashboard",
-    link: "/dashboard",
-    background: true,
-  },
-];
+type Link = {
+  name: string;
+  link: string;
+  background?: boolean;
+};
 
-export default function Navbar() {
+export default function Navbar({ Links }: { Links: Link[] }) {
   const [showMobile, setShowMobile] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    setShowMobile(false);
+    // setShowMobile(false);
   }, []);
 
   return (
@@ -75,7 +61,9 @@ export default function Navbar() {
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
-          onClick={() => setShowMobile(!showMobile)}
+          onClick={() => {
+            setShowMobile(!showMobile);
+          }}
         >
           <path
             strokeLinecap="round"
@@ -87,6 +75,7 @@ export default function Navbar() {
           <MobileNavbar
             currentRoute={pathname}
             close={() => setShowMobile(false)}
+            Links={Links}
           />
         )}
       </div>
@@ -97,9 +86,11 @@ export default function Navbar() {
 const MobileNavbar = ({
   currentRoute,
   close,
+  Links,
 }: {
   currentRoute: string;
   close: any;
+  Links: Link[];
 }) => {
   return (
     <div className="z-[2] fixed top-0 left-0 h-screen w-full bg-white/90">
