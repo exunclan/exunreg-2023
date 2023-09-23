@@ -4,7 +4,8 @@
 
 - `/app/(sanity)/` - Code for the Sanity Studio frontend
 - `/app/(website)/` - Registration platform frontend
-- `/api/` - Backend API
+- `/app/(dashboard)` - School Dashboard frontend
+- `/app/api/` - Backend API
 - `/components/` - Frontend components
 - `/sanity/` - Sanity schema and configurations
 - `/util/data/` - Data files
@@ -17,10 +18,13 @@
 - `/events` - Events description
 - `/contact` - Contact details
 - `/dashboard` - Management dashboard
+  - `/profile` - Profile editing
+  - `/teams` - Team management page
 - `/user/`
   - `/signin` - Sign In page
   - `/register` - Registration page
   - `/verify` - Email verification confirmation page
+  - `/logout` - User logout route
 
 ## Hosting
 

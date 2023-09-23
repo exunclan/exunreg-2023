@@ -3,11 +3,15 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { encode, decode } from "next-auth/jwt";
 import type { SessionStrategy } from "next-auth";
 
-const authOptions = {
+export const authOptions = {
   session: {
     strategy: "jwt" as SessionStrategy,
   },
   jwt: { encode, decode },
+  pages: {
+    signIn: "/user/signin",
+    signOut: "/user/logout",
+  },
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -32,11 +36,12 @@ const authOptions = {
           }
         ).then((res) => res.json());
 
+        const { password, _id, team, ...filteredUser } = user;
+
         if (!user.error) {
           const auth = {
             id: user["_id"],
-            email: user.email,
-            name: user.name,
+            ...filteredUser,
           };
           return auth;
         } else {
@@ -46,8 +51,12 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async redirect() {
-      return "/";
+    async redirect({ url, baseUrl }: any) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
     },
     async jwt({ user, token }: any) {
       if (user) {
