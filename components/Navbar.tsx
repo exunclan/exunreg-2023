@@ -19,7 +19,7 @@ export default function Navbar({ Links }: { Links: Link[] }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    // setShowMobile(false);
+    setShowMobile(false);
   }, []);
 
   return (
