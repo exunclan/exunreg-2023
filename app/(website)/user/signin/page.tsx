@@ -28,6 +28,7 @@ export default function SignIn() {
     })) as SignInResponse;
 
     if (error) {
+      console.log(error);
       setValue("password", "");
       if (error === "account_not_found")
         setError("Account does not exist. Please create a new one.");
