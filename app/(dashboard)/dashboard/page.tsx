@@ -9,9 +9,12 @@ export default function DashboardPage() {
   const { data: session, status } = useSession();
 
   if (status === "unauthenticated") redirect("/user/signin");
-  if (status === "loading") return <>loading</>;
-
-  console.log(session?.user);
+  if (status === "loading")
+    return (
+      <div className="flex justify-center items-center w-full text-2xl text-main font-bold">
+        Loading...
+      </div>
+    );
 
   return (
     <Column className="w-full my-4">
