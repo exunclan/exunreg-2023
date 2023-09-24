@@ -66,6 +66,7 @@ export async function GET(req: NextRequest) {
   if (!tokenValid)
     redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=false`);
   redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=true`);
+  return new NextResponse(JSON.stringify({ success: true }));
 }
 
 export async function POST(req: NextRequest) {
