@@ -3,7 +3,7 @@
 import Navbar from "@/components/Navbar";
 import { SessionProvider } from "next-auth/react";
 
-export default function WebsiteLayout({
+export default function DashboardLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
@@ -17,20 +17,21 @@ export default function WebsiteLayout({
             link: "/",
           },
           {
-            name: "Events",
-            link: "/events",
+            name: "Profile",
+            link: "/dashboard/profile",
           },
           {
-            name: "Contact",
-            link: "/contact",
+            name: "Manage Teams",
+            link: "/dashboard/teams",
           },
           {
-            name: "Dashboard",
-            link: "/dashboard",
+            name: "Logout",
+            link: "/user/logout",
             background: true,
           },
         ]}
       />
+
       <SessionProvider>{children}</SessionProvider>
     </div>
   );
