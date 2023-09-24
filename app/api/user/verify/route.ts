@@ -2,21 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import client from "@/util/data/Mongo";
+import { redirect } from "next/navigation";
 
 export async function GET(req: NextRequest) {
   // Get query params
   const searchParams = new URLSearchParams(new URL(req.url).search);
   const token = searchParams.get("token");
 
-  let tokenValid = false;
+  let tokenValid = false,
+    expired = false;
 
   // Verify token
   jwt.verify(token!, process.env.JWT_SECRET!, async (err, info) => {
     if (err) {
-      return new NextResponse(JSON.stringify(err));
-    }
-
-    tokenValid = true;
+      if (err.name === "TokenExpiredError") expired = true;
+      return;
+    } else tokenValid = true;
 
     // Extract info
     const decoded = info as { email: string; emailType: string };
@@ -60,12 +61,11 @@ export async function GET(req: NextRequest) {
     }
   });
 
-  // Check if token is valid
-  if (!tokenValid) {
-    return new NextResponse("Invalid token");
-  }
-
-  return new NextResponse("verified");
+  if (expired)
+    redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=expired`);
+  if (!tokenValid)
+    redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=false`);
+  redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=true`);
 }
 
 export async function POST(req: NextRequest) {
@@ -73,26 +73,13 @@ export async function POST(req: NextRequest) {
   const { email, teacherEmail } = await req.json();
 
   // Initialize nodemailer
-
-  /* // Test account for nodemailer
-  // Don't forget to uncomment the closing parenthesis on the createTestAccount function
-  nodemailer.createTestAccount(async (_, acc) => {
-    const transporter = nodemailer.createTransport({
-      host: "smtp.ethereal.email"
-      port: 587,
-      secure: false,
-      auth: {
-        user: acc.user,
-        pass: acc.pass
-      },
-    });
-  */
-
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASSWORD,
+      pass: process.env.GMAIL_PASS,
     },
   });
 
@@ -101,23 +88,23 @@ export async function POST(req: NextRequest) {
     return {
       from: "Exunclan <exun@dpsrkp.net>",
       to: to,
-      subject: "Verify Email",
+      subject: "Exun email verification",
       html: `
-			<p>Pls verify your email at <a href="${url}">${url}</a></p>
+			<p>Please click on the following link to verify your email for Exun 2023. <br><br> <a href="${url}">${url}</a></p>
 			`,
     };
   };
 
   // Sign jwt token if email exists
   if (email) {
-    jwt.sign(
+    await jwt.sign(
       {
         email: email,
         emailType: "email",
       },
       process.env.JWT_SECRET!,
       {
-        expiresIn: "1hr",
+        expiresIn: "24hr",
       },
       (err, token) => {
         if (err) {
@@ -128,10 +115,9 @@ export async function POST(req: NextRequest) {
 
         transporter.sendMail(emailOptions(url, email), (err, _) => {
           if (err) {
+            console.log(err);
             return new NextResponse(JSON.stringify(err));
           }
-
-          console.log(nodemailer.getTestMessageUrl(_));
         });
       }
     );
@@ -139,14 +125,14 @@ export async function POST(req: NextRequest) {
 
   // Sign jwt token if teacherEmail exists
   if (teacherEmail) {
-    jwt.sign(
+    await jwt.sign(
       {
         email: teacherEmail,
         emailType: "teacher",
       },
       process.env.JWT_SECRET!,
       {
-        expiresIn: "1hr",
+        expiresIn: "24hr",
       },
       (err, token) => {
         if (err) {
@@ -157,15 +143,13 @@ export async function POST(req: NextRequest) {
 
         transporter.sendMail(emailOptions(url, teacherEmail), (err, _) => {
           if (err) {
+            console.log(err);
             return new NextResponse(JSON.stringify(err));
           }
-
-          console.log(nodemailer.getTestMessageUrl(_));
         });
       }
     );
   }
-  // });
 
   return new NextResponse("Verificaion email sent");
 }

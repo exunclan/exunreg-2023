@@ -64,7 +64,7 @@ export default function SignIn() {
         Register
       </div>
       {success ? (
-        <div className="text-sub text-xl w-[80vw] md:w-1/3 text-center">
+        <div className="text-sub text-xl w-[80vw] md:w-2/3 text-center">
           Congratulations! Your registration was successful. Please check the
           inbox of the registered School email and Teacher Incharge email for
           verification links before you can Sign In.
