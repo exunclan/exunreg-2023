@@ -31,9 +31,8 @@ export async function POST(req: NextRequest) {
   const res = await db.collection("users").insertOne({
     password: pass,
     teams: {},
-    // TODO: Make them false when the email logic has been implemented
-    emailVerified: true,
-    teacherEmailVerified: true,
+    emailVerified: false,
+    teacherEmailVerified: false,
     email,
     name,
     phone,
