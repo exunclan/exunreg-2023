@@ -3,16 +3,17 @@ import client from "@/util/data/Mongo";
 import { ObjectId } from "mongodb";
 import { TeamMember } from "@/util/types";
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { event: string } }
+) {
   // Get query params
-  const searchParams = new URLSearchParams(new URL(req.url).search);
+  const searchParams = req.nextUrl.searchParams;
   const userId = searchParams.get("userId");
-  const event = searchParams.get("event");
-  const name = searchParams.get("name");
-  const clas = searchParams.get("class");
-  const email = searchParams.get("email");
-  const phone = searchParams.get("phone");
-  const role = searchParams.get("role");
+  const memberId = searchParams.get("memberId");
+
+  // Get event
+  const { event } = params;
 
   // Initialize db
   const db = client.db("reg-2023");
@@ -26,22 +27,16 @@ export async function GET(req: NextRequest) {
     return new NextResponse("Invalid userId");
   }
 
-  if (!event) {
-    return new NextResponse("No event provided");
+  if (!user["teams"][event]) {
+    return new NextResponse("Event doesn't exists");
   }
 
   // Get member (this is slow btw should we use a searching alg? 🤔)
   const member = user["teams"][event].filter((member: TeamMember | null) => {
-    return (
-      member!.name == name &&
-      member!.class == clas &&
-      member!.email == email &&
-      member!.phone == phone &&
-      (role ? member!.role == role : true)
-    );
-  });
+    return member!["_id"].toString() == memberId!;
+  })[0];
 
   return new NextResponse(JSON.stringify(member));
 }
 
-export async function POST(req: NextRequest) {}
+export async function POST(req: NextRequest) { }
