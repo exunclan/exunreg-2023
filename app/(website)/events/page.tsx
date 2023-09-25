@@ -1,10 +1,27 @@
 "use client";
 
 import { fetchEvents } from "@/util/data/Events";
+import { useQuery } from "@tanstack/react-query";
 import EventDescription from "@/components/EventDescription";
+import Loading from "@/components/Loading";
 
-export default async function EventsPage() {
-  const Events = await fetchEvents();
+export default function EventsPage() {
+  const {
+    isLoading,
+    error,
+    data: Events,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: fetchEvents,
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!Events || error) {
+    return <>error</>;
+  }
 
   return (
     <div className="my-[4rem] mx-[2rem] md:mx-[9rem]">
