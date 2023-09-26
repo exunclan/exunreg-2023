@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 
 export type TeamMember = {
-  id: string;
+  _id: ObjectId;
   name: string;
   class: string;
   email: string;
