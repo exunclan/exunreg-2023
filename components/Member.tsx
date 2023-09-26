@@ -30,12 +30,14 @@ type FormData = {
 };
 
 export default function Member({
+  userId,
   data,
   eventData,
   setMemberOpen,
   memberOpen,
   removeMember,
 }: {
+  userId: string;
   data: TeamMember;
   eventData: IEvent;
   setMemberOpen: Dispatch<SetStateAction<string | null>>;
@@ -45,6 +47,8 @@ export default function Member({
   const {
     formState: { isDirty },
     register,
+    watch,
+    reset,
     handleSubmit,
   } = useForm<FormData>({
     defaultValues: {
@@ -80,40 +84,43 @@ export default function Member({
     classMax === -1 ? classMin + 1 : classMax + 1
   );
 
-  const handleSave = handleSubmit(async (data) => {
-    /*
-      setLoading(true);
-      await fetch(`/api/dashboard/members/${eventData.name}/members`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+  const handleSave = handleSubmit(async (formData) => {
+    setLoading(true);
+    await fetch(`/api/dashboard/${eventData.name}/member`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        data: {
+          _id: data._id,
+          ...formData,
         },
-        body: JSON.stringify({
-          data
-        })
-      })
-      setLoading(false);
-    */
+      }),
+    });
+    setLoading(false);
+    reset(formData);
   });
 
   return (
     <div className="w-full flex flex-col jutify-center items-center m-1">
       <div
         className={`${
-          memberOpen === data.id && "text-white bg-main"
+          memberOpen === data._id && "text-white bg-main"
         } flex flex-row justify-between items-center p-2 rounded-md border border-sub md:w-1/2 w-[80vw] cursor-pointer`}
-        onClick={() => setMemberOpen(memberOpen === data.id ? null : data.id)}
+        onClick={() => setMemberOpen(memberOpen === data._id ? null : data._id)}
       >
-        {data.name}
+        {watch("name")}
 
-        {memberOpen === data.id ? (
+        {memberOpen === data._id ? (
           <BsFillCaretUpFill />
         ) : (
           <BsFillCaretDownFill />
         )}
       </div>
 
-      {memberOpen === data.id && (
+      {memberOpen === data._id && (
         <div className={`rounded-b-md bg-gray-100 md:w-1/2 w-[80vw] p-4 mb-3`}>
           <form>
             <div className="flex flex-col my-3">
@@ -167,25 +174,28 @@ export default function Member({
               />
             </div>
 
-            {isDirty && (
-              <button
-                type="submit"
-                disabled={loading}
-                className="p-2 bg-main text-white rounded-md mr-2"
-                onClick={() => handleSave()}
+            <div className="flex flex-row justify-center items-center">
+              {isDirty && (
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="p-2 bg-main text-white rounded-md mr-2"
+                  onClick={() => handleSave()}
+                >
+                  {loading ? "Loading..." : "Save"}
+                </button>
+              )}
+
+              <div
+                onClick={() => {
+                  confirm(`Are you sure you want to remove ${data.name}?`) &&
+                    removeMember(data._id);
+                }}
+                className="p-2 bg-none border border-red-500 text-red-500 rounded-md"
               >
-                {loading ? "Loading..." : "Save"}
-              </button>
-            )}
-            <button
-              onClick={() => {
-                confirm(`Are you sure you want to remove ${data.name}?`) &&
-                  removeMember(data.id);
-              }}
-              className="p-2 bg-none border border-red-500 text-red-500 rounded-md"
-            >
-              Remove
-            </button>
+                Remove
+              </div>
+            </div>
           </form>
         </div>
       )}
