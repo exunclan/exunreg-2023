@@ -16,12 +16,12 @@ export default function DashboardTeamsPage() {
     queryFn: fetchEvents,
   });
 
-  if (!events || error) {
-    return <>error</>;
-  }
-
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (!events || error) {
+    return <>error</>;
   }
 
   return (

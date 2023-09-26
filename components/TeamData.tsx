@@ -11,9 +11,11 @@ import Loading from "./Loading";
 export default function TeamData({
   event,
   team,
+  userId,
 }: {
   event: string;
   team: TeamMember[];
+  userId: string;
 }) {
   const [members, setMembers] = useState<TeamMember[]>(team);
   const [memberOpen, setMemberOpen] = useState<string | null>(null);
@@ -27,43 +29,42 @@ export default function TeamData({
   if (error || !eventData) return <>error</>;
 
   const removeMember = async (id: string) => {
-    let filtered = members.filter((x) => x.id != id);
-    /*
-      await fetch(`/api/dashboard/${event}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          members: filtered
-        })
-      })
-    */
+    let filtered = members.filter((x) => x._id.toString() != id);
+    await fetch(`/api/dashboard/${event}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        members: filtered,
+      }),
+    });
     setMembers(filtered);
   };
 
-  const addMember = () => {
+  const addMember = async () => {
     let newMembers = [...members];
     newMembers.push({
-      id: "",
+      _id: "",
       name: "New Member",
       phone: "",
       role: "",
       email: "",
       class: "",
     });
-    /*
-      await fetch(`/api/dashboard/${event}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          members: filtered
-        })
-      })
-    */
-    setMembers(newMembers);
+
+    const updatedMembers = await fetch(`/api/dashboard/${event}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId,
+        members: newMembers,
+      }),
+    }).then((res) => res.json());
+    setMembers(updatedMembers);
   };
 
   return (
@@ -71,6 +72,7 @@ export default function TeamData({
       {members.map((member, i) => (
         <Member
           key={i}
+          userId={userId}
           data={member}
           eventData={eventData}
           setMemberOpen={setMemberOpen}
