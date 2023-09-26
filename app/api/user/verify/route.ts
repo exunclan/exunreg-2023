@@ -66,12 +66,26 @@ export async function GET(req: NextRequest) {
   if (!tokenValid)
     redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=false`);
   redirect(`${process.env.NEXT_PUBLIC_URL}/user/verify?success=true`);
+  // @ts-ignore: Unreachable code error
   return new NextResponse(JSON.stringify({ success: true }));
 }
 
 export async function POST(req: NextRequest) {
   // Get email, teacherEmail
   const { email, teacherEmail } = await req.json();
+
+  /* // Test account for nodemailer
+  // Don't forget to uncomment the closing parenthesis on the createTestAccount function
+  nodemailer.createTestAccount(async (_, acc) => {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: acc.user,
+        pass: acc.pass,
+      },
+    }); */
 
   // Initialize nodemailer
   const transporter = nodemailer.createTransport({
@@ -98,7 +112,7 @@ export async function POST(req: NextRequest) {
 
   // Sign jwt token if email exists
   if (email) {
-    await jwt.sign(
+    jwt.sign(
       {
         email: email,
         emailType: "email",
@@ -119,6 +133,9 @@ export async function POST(req: NextRequest) {
             console.log(err);
             return new NextResponse(JSON.stringify(err));
           }
+
+          /* // For test account
+          console.log(nodemailer.getTestMessageUrl(_)); */
         });
       }
     );
@@ -126,7 +143,7 @@ export async function POST(req: NextRequest) {
 
   // Sign jwt token if teacherEmail exists
   if (teacherEmail) {
-    await jwt.sign(
+    jwt.sign(
       {
         email: teacherEmail,
         emailType: "teacher",
@@ -147,10 +164,14 @@ export async function POST(req: NextRequest) {
             console.log(err);
             return new NextResponse(JSON.stringify(err));
           }
+
+          /* // For test account
+          console.log(nodemailer.getTestMessageUrl(_)); */
         });
       }
     );
   }
+  // });
 
   return new NextResponse("Verificaion email sent");
 }
