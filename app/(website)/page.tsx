@@ -3,9 +3,27 @@
 import { Card, HeaderCard } from "@/components/EventCards";
 import { Column, Row } from "@/components/Flex";
 import { fetchEvents } from "@/util/data/Events";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "@/components/Loading";
 
-export default async function HomePage() {
-  const Events = await fetchEvents();
+export default function HomePage() {
+  const {
+    isLoading,
+    data: Events,
+    error,
+  } = useQuery({
+    queryKey: ["events"],
+    queryFn: fetchEvents,
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!Events || error) {
+    return <>error</>;
+  }
+
   return (
     <>
       {/* Hero */}

@@ -2,7 +2,7 @@
  * Function to fetch the data from Sanity
  */
 
-import { createClient } from "next-sanity";
+import { createClient, groq } from "next-sanity";
 
 const client = createClient({
   apiVersion: "2023-09-11",
@@ -54,18 +54,22 @@ interface IData extends Omit<IEvent, "image"> {
 // Fetch the data from Sanity
 
 export const fetchEvents = async (): Promise<IEvent[]> => {
-  const data = await client.fetch<IData[]>(`*[_type=="event"]`);
-  return data.map((x) => {
-    return {
-      description: x.description,
-      registrations: x.registrations,
-      classes: x.classes,
-      name: x.name,
-      participants: x.participants,
-      teams: x.teams,
-      summary: x.summary,
-      independent: x.independent,
-      image: Images[x.name],
-    };
+  const data = await client.fetch<IData[]>(groq`*[_type=="event"]`);
+  return new Promise((resolve, reject) => {
+    resolve(
+      data.map((x) => {
+        return {
+          description: x.description,
+          registrations: x.registrations,
+          classes: x.classes,
+          name: x.name,
+          participants: x.participants,
+          teams: x.teams,
+          summary: x.summary,
+          independent: x.independent,
+          image: Images[x.name],
+        };
+      })
+    );
   });
 };
