@@ -67,5 +67,5 @@ export async function POST(req: NextRequest) {
     }
   );
 
-  return new NextResponse("Reset password email sent");
+  return new NextResponse(JSON.stringify({ success: "Reset link sent" }));
 }
