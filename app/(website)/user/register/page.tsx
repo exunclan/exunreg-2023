@@ -60,11 +60,11 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col justify-center items-center h-max m-4">
-      <div className="text-4xl md:text-6xl text-main font-bold m-4">
+      <div className="text-4xl md:text-6xl text-main font-semibold m-4">
         Register
       </div>
       {success ? (
-        <div className="text-sub text-xl w-[80vw] md:w-2/3 text-center">
+        <div className="text-accent text-xl w-[80vw] md:w-2/3 text-center">
           Congratulations! Your registration was successful. Please check the
           inbox of the registered School email and Teacher Incharge email for
           verification links before you can Sign In.
@@ -81,30 +81,30 @@ export default function SignIn() {
           )}
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">Name of School</label>
+            <label className="text-sm text-accent">Name of School</label>
             <input
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("name")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">
+            <label className="text-sm text-accent">
               {"Email (please use your school/club's email)"}
             </label>
             <input
               type="email"
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("email")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">Password</label>
+            <label className="text-sm text-accent">Password</label>
             <input
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               required
               type="password"
               {...register("password")}
@@ -112,7 +112,7 @@ export default function SignIn() {
           </div>
           <div className="flex flex-col my-3">
             <div className="flex flex-row justify-between">
-              <label className="text-sm text-sub">Re-enter Password</label>
+              <label className="text-sm text-accent">Re-enter Password</label>
               {password !== rePassword && (
                 <label className="text-sm text-red-500">
                   Passwords do not match
@@ -120,7 +120,7 @@ export default function SignIn() {
               )}
             </div>
             <input
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               required
               type="password"
               {...register("rePassword")}
@@ -128,65 +128,67 @@ export default function SignIn() {
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">Contact Number</label>
+            <label className="text-sm text-accent">Contact Number</label>
             <input
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("phone")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">Name of Teacher Incharge</label>
+            <label className="text-sm text-accent">
+              Name of Teacher Incharge
+            </label>
             <input
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("teacher")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">
+            <label className="text-sm text-accent">
               {"Email of Teacher Incharge"}
             </label>
             <input
               type="email"
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("teacherEmail")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">Name of Principal</label>
+            <label className="text-sm text-accent">Name of Principal</label>
             <input
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("principal")}
             />
           </div>
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">School Address</label>
+            <label className="text-sm text-accent">School Address</label>
             <input
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("address")}
             />
           </div>
 
           <div className="flex flex-row justify-between my-3">
-            <label className="text-sm text-sub">
+            <label className="text-sm text-accent">
               Is your school in the NCR?
             </label>
             <input
               type="checkbox"
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("ncr")}
             />
           </div>
 
-          <div className="text-text self-end text-xs md:text-sm my-1">
+          <div className="text-accent-light self-end text-xs md:text-sm my-1">
             Already have an account?{" "}
             <span className="border-b border-dashed">
               <a href="/user/signin">Sign-in instead.</a>

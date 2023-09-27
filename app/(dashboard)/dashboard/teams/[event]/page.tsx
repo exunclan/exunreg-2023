@@ -21,7 +21,7 @@ export default async function DashboardEventTeamsPage({
 
   return (
     <Column className="m-3">
-      <div className="text-main text-4xl font-bold text-center">
+      <div className="text-main text-4xl font-semibold text-center m-6">
         {event} Team
       </div>
       <TeamData event={event} team={team} userId={session?.user?.id} />

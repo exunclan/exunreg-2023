@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import Member from "./Member";
 import { AiOutlinePlus } from "react-icons/ai";
 import Loading from "./Loading";
+import Error from "./Error";
 
 export default function TeamData({
   event,
@@ -26,7 +27,7 @@ export default function TeamData({
   const eventData = data?.filter((x) => x.name === event)[0];
 
   if (isLoading) return <Loading />;
-  if (error || !eventData) return <>error</>;
+  if (error || !eventData) return <Error />;
 
   const removeMember = async (id: string) => {
     let filtered = members.filter((x) => x._id.toString() != id);

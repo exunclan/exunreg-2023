@@ -14,7 +14,7 @@ export default function LogoutPage() {
     redirect("/user/signin");
   } else if (status === "loading") {
     return (
-      <div className="w-full flex justify-center items-center text-main text-2xl font-bold">
+      <div className="w-full flex justify-center items-center text-main text-2xl font-semibold">
         Logging Out
       </div>
     );

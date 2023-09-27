@@ -107,8 +107,8 @@ export default function Member({
     <div className="w-full flex flex-col jutify-center items-center m-1">
       <div
         className={`${
-          memberOpen === data._id && "text-white bg-main"
-        } flex flex-row justify-between items-center p-2 rounded-md border border-sub md:w-1/2 w-[80vw] cursor-pointer`}
+          memberOpen === data._id && "text-white bg-main shadow"
+        } transition-all flex flex-row justify-between items-center p-2 rounded-md border border-sub/[0.2] md:w-1/2 w-[80vw] cursor-pointer text-accent`}
         onClick={() => setMemberOpen(memberOpen === data._id ? null : data._id)}
       >
         {watch("name")}
@@ -121,40 +121,42 @@ export default function Member({
       </div>
 
       {memberOpen === data._id && (
-        <div className={`rounded-b-md bg-gray-100 md:w-1/2 w-[80vw] p-4 mb-3`}>
+        <div
+          className={`shadow rounded-b-md bg-gray-50 md:w-1/2 w-[80vw] p-4 mb-3`}
+        >
           <form>
             <div className="flex flex-col my-3">
-              <label className="text-sm text-sub">Name</label>
+              <label className="text-sm text-accent">Name</label>
               <input
                 required
-                className="border border-sub rounded-md p-2 text-text"
+                className="border border-sub rounded-md p-2 text-accent-light"
                 {...register("name")}
               />
             </div>
 
             <div className="flex flex-col my-3">
-              <label className="text-sm text-sub">Email</label>
+              <label className="text-sm text-accent">Email</label>
               <input
                 type="email"
-                className="border border-sub rounded-md p-2 text-text"
+                className="border border-sub rounded-md p-2 text-accent-light"
                 {...register("email")}
               />
             </div>
 
             <div className="flex flex-col my-3">
-              <label className="text-sm text-sub">Phone</label>
+              <label className="text-sm text-accent">Phone</label>
               <input
                 required
-                className="border border-sub rounded-md p-2 text-text"
+                className="border border-sub rounded-md p-2 text-accent-light"
                 {...register("phone")}
               />
             </div>
 
             <div className="flex flex-col my-3">
-              <label className="text-sm text-sub">Class</label>
+              <label className="text-sm text-accent">Class</label>
               <select
                 required
-                className="border border-sub rounded-md p-2 text-text"
+                className="border border-sub rounded-md p-2 text-accent-light"
                 {...register("class")}
               >
                 {classRange.map((x, i) => (
@@ -166,15 +168,15 @@ export default function Member({
             </div>
 
             <div className="flex flex-col my-3">
-              <label className="text-sm text-sub">Role</label>
+              <label className="text-sm text-accent">Role</label>
               <input
                 required
-                className="border border-sub rounded-md p-2 text-text"
+                className="border border-sub rounded-md p-2 text-accent-light"
                 {...register("role")}
               />
             </div>
 
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-end items-center">
               {isDirty && (
                 <button
                   type="submit"
@@ -191,7 +193,7 @@ export default function Member({
                   confirm(`Are you sure you want to remove ${data.name}?`) &&
                     removeMember(data._id);
                 }}
-                className="p-2 bg-none border border-red-500 text-red-500 rounded-md"
+                className="p-2 bg-none border border-red-500 text-red-500 rounded-md cursor-pointer"
               >
                 Remove
               </div>

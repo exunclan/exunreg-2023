@@ -24,7 +24,12 @@ export async function GET(
   });
 
   if (!user) {
-    return new NextResponse("Invalid userId");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Invalid userId",
+      })
+    );
   }
 
   if (user["teams"][event] === undefined)
@@ -53,7 +58,12 @@ export async function POST(
   })) as User;
 
   if (!user) {
-    return new NextResponse("Invalid userId");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Invalid userId",
+      })
+    );
   }
 
   let teams = user.teams;
