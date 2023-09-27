@@ -82,7 +82,7 @@ export default function SignIn() {
         <div className="text-text self-end text-xs md:text-sm my-1">
           Forgot Password?{" "}
           <span className="border-b border-dashed">
-            <a href="/user/register">Reset it.</a>
+            <a href="/user/forgot">Reset it.</a>
           </span>
         </div>
         <div className="text-text self-end text-xs md:text-sm my-1">
