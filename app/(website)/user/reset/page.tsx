@@ -58,7 +58,7 @@ export default function Reset() {
     </div>
   ) : (
     <div className="flex flex-col justify-center items-center h-max m-4">
-      <div className="text-4xl md:text-6xl text-main font-bold m-4">
+      <div className="text-4xl md:text-4xl text-main font-semibold m-4">
         Reset password
       </div>
 
@@ -73,9 +73,9 @@ export default function Reset() {
         )}
 
         <div className="flex flex-col my-3">
-          <label className="text-sm text-sub">Password</label>
+          <label className="text-sm text-accent">Password</label>
           <input
-            className="border border-sub rounded-md p-2 text-text"
+            className="border border-sub rounded-md p-2 text-accent-light"
             required
             type="password"
             {...register("password")}
@@ -83,7 +83,7 @@ export default function Reset() {
         </div>
         <div className="flex flex-col my-3">
           <div className="flex flex-row justify-between">
-            <label className="text-sm text-sub">Re-enter Password</label>
+            <label className="text-sm text-accent">Re-enter Password</label>
             {password !== rePassword && (
               <label className="text-sm text-red-500">
                 Passwords do not match
@@ -91,7 +91,7 @@ export default function Reset() {
             )}
           </div>
           <input
-            className="border border-sub rounded-md p-2 text-text"
+            className="border border-sub rounded-md p-2 text-accent-light"
             required
             type="password"
             {...register("rePassword")}
