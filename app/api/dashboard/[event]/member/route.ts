@@ -25,11 +25,21 @@ export async function GET(
   });
 
   if (!user) {
-    return new NextResponse("Invalid userId");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Invalid userId",
+      })
+    );
   }
 
   if (!user["teams"][event]) {
-    return new NextResponse("Event doesn't exists");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Event doesn't exists",
+      })
+    );
   }
 
   // Get member (this is slow btw should we use a searching alg? 🤔)
@@ -60,11 +70,21 @@ export async function POST(
   });
 
   if (!user) {
-    return new NextResponse("Invalid userId");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Invalid userId",
+      })
+    );
   }
 
   if (!user["teams"][event]) {
-    return new NextResponse("Event doesn't exists");
+    return new NextResponse(
+      JSON.stringify({
+        error: true,
+        message: "Event doesn't exists",
+      })
+    );
   }
 
   let teams = user["teams"];

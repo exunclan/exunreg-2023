@@ -45,7 +45,7 @@ export default function SignIn() {
 
   return (
     <div className="flex flex-col justify-center items-center h-max m-4">
-      <div className="text-4xl md:text-6xl text-main font-bold m-4">
+      <div className="text-4xl md:text-6xl text-main font-semibold m-4">
         Sign In
       </div>
 
@@ -60,32 +60,32 @@ export default function SignIn() {
         )}
 
         <div className="flex flex-col my-3">
-          <label className="text-sm text-sub">Email</label>
+          <label className="text-sm text-accent">Email</label>
           <input
             type="email"
             required
-            className="border border-sub rounded-md p-2 text-text"
+            className="border border-sub rounded-md p-2 text-accent-light"
             {...register("email")}
           />
         </div>
 
         <div className="flex flex-col my-3">
-          <label className="text-sm text-sub">Password</label>
+          <label className="text-sm text-accent">Password</label>
           <input
-            className="border border-sub rounded-md p-2 text-text"
+            className="border border-sub rounded-md p-2 text-accent-light"
             required
             type="password"
             {...register("password")}
           />
         </div>
 
-        <div className="text-text self-end text-xs md:text-sm my-1">
+        <div className="text-accent-light self-end text-xs md:text-sm my-1">
           Forgot Password?{" "}
           <span className="border-b border-dashed">
             <a href="/user/forgot">Reset it.</a>
           </span>
         </div>
-        <div className="text-text self-end text-xs md:text-sm my-1">
+        <div className="text-accent-light self-end text-xs md:text-sm my-1">
           Dont have an account?{" "}
           <span className="border-b border-dashed">
             <a href="/user/register">Create one.</a>

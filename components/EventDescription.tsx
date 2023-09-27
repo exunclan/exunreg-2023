@@ -32,10 +32,10 @@ export default function EventDescription({
     >
       <div className="flex flex-col-reverse md:flex-row justify-between items-center w-full">
         <div className="flex flex-col justify-center items-center md:items-start">
-          <div className="text-sub font-bold text-3xl md:text-4xl my-4">
+          <div className="text-accent font-bold text-3xl md:text-4xl my-4">
             {name}
           </div>
-          <div className="text-sub text-lg">
+          <div className="text-accent text-lg">
             Open for classes <span className="font-medium">{classes}</span>{" "}
             <br />
             Maximum teams per school:{" "}
@@ -67,9 +67,9 @@ export default function EventDescription({
         </div>
       </div>
       <div>
-        <ul className="marker:text-text list-disc p-7">
+        <ul className="marker:text-accent-light list-disc p-7">
           {description.map((x, j) => (
-            <li key={j} className="text-text text-lg font-light">
+            <li key={j} className="text-accent-light text-lg font-light">
               {x}
             </li>
           ))}

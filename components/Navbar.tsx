@@ -39,7 +39,7 @@ export default function Navbar({ Links }: { Links: Link[] }) {
           {Links.map((x, i) => (
             <div
               key={i}
-              className={`text-sub mx-4 text-lg ${
+              className={`text-accent mx-4 text-lg ${
                 x.background && "button-background"
               }`}
             >
@@ -114,7 +114,7 @@ const MobileNavbar = ({
           {Links.map(({ background, link, name }, i) => (
             <div
               key={i}
-              className={`text-sub m-4 text-2xl ${
+              className={`text-accent m-4 text-2xl ${
                 background && "button-background"
               }`}
             >

@@ -5,6 +5,7 @@ import { Column, Row } from "@/components/Flex";
 import { useQuery } from "@tanstack/react-query";
 import { fetchEvents } from "@/util/data/Events";
 import Loading from "@/components/Loading";
+import Error from "@/components/Error";
 
 export default function DashboardTeamsPage() {
   const {
@@ -21,30 +22,39 @@ export default function DashboardTeamsPage() {
   }
 
   if (!events || error) {
-    return <>error</>;
+    return <Error />;
   }
 
   return (
     <>
       <Column>
-        <div className="text-4xl text-main font-bold">Manage Teams</div>
-        <Row className="flex-wrap my-4 w-[80vw] md:w-2/3">
-          {events.map(({ name, image }, i) => (
+        <div className="text-4xl text-main font-semibold mt-5 mb-3">
+          Manage Teams
+        </div>
+        <Row className="flex-wrap my-4 w-full">
+          {events.map(({ name, summary, image }, i) => (
             <a
-              key={i}
               href={`/dashboard/teams/${name}`}
-              className="w-[80vw] md:w-[20vw] m-3"
+              key={i}
+              className="w-3/4 lg:w-1/3 h-[15rem] m-4"
             >
-              <Column className="w-[80vw] md:w-[20vw] p-4 border border-sub/[0.5] rounded-lg hover:shadow cursor-pointer">
-                <Image
-                  className="m-3"
-                  src={image}
-                  alt={name}
-                  height={150}
-                  width={150}
-                />
-                <div className="text-main text-2xl">{name}</div>
-              </Column>
+              <div className="flex flex-col lg:flex-row items-center justify-center rounded-lg shadow-md m-4 w-full h-full">
+                <div className="flex flex-col justify-center items-center p-4">
+                  <Image
+                    className="mx-12 my-10"
+                    src={image}
+                    alt={name}
+                    height={175}
+                    width={175}
+                  />
+                </div>
+                <div className="flex flex-col justify-center  bg-light-blue h-full w-full py-8 pl-12 pr-6">
+                  <div className="text-accent text-xl font-semibold mb-2">
+                    {name}
+                  </div>
+                  <div className="text-sm text-accent">{summary}</div>
+                </div>
+              </div>
             </a>
           ))}
         </Row>

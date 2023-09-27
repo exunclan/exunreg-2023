@@ -8,7 +8,7 @@ type FormData = {
 };
 
 export default function Forgot() {
-  const { register, control, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,11 +36,11 @@ export default function Forgot() {
 
   return (
     <div className="flex flex-col justify-center items-center h-max m-4">
-      <div className="text-4xl md:text-6xl text-main font-bold m-4">
+      <div className="text-4xl md:text-4xl text-main font-semibold m-4">
         Forgot password
       </div>
       {success ? (
-        <div className="text-sub text-xl w-[80vw] md:w-2/3 text-center">
+        <div className="text-accent text-xl w-[80vw] md:w-2/3 text-center">
           Please check the inbox of the registered School email for password
           reset link. It is valid for only 1 hour.
         </div>
@@ -56,11 +56,11 @@ export default function Forgot() {
           )}
 
           <div className="flex flex-col my-3">
-            <label className="text-sm text-sub">{"Email"}</label>
+            <label className="text-sm text-accent">{"Email"}</label>
             <input
               type="email"
               required
-              className="border border-sub rounded-md p-2 text-text"
+              className="border border-sub rounded-md p-2 text-accent-light"
               {...register("email")}
             />
           </div>

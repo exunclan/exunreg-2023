@@ -25,7 +25,7 @@ export default function EventsPage() {
 
   return (
     <div className="my-[4rem] mx-[2rem] md:mx-[9rem]">
-      <div className="text-main text-5xl md:text-6xl font-bold">Events</div>
+      <div className="text-main text-5xl md:text-6xl font-semibold">Events</div>
       <div>
         {Events.map(
           (
