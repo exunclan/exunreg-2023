@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
   const { token, newPass } = await req.json();
 
   // Verify token
-  jwt.verify(token!, process.env.JWT_SECRET!, async (err, info) => {
+  jwt.verify(token!, process.env.JWT_SECRET!, async (err: any, info: any) => {
     if (err) {
       if (err.name === "TokenExpiredError") {
         return new NextResponse(

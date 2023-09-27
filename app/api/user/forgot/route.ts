@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     {
       expiresIn: "1h",
     },
-    (err, token) => {
+    (err: any, token: any) => {
       if (err) {
         return new NextResponse(JSON.stringify(err));
       }

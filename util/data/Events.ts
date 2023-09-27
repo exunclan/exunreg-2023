@@ -28,6 +28,7 @@ const Images: { [key: string]: string } = {
   "Junior Quiz": "/junior quiz.svg",
   "Open Quiz": "/open quiz.svg",
   CubXL: "/cubxl.svg",
+  "Turing Test": "/Turing.svg",
 };
 
 export interface IEvent {

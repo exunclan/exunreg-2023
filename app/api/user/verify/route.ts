@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     expired = false;
 
   // Verify token
-  jwt.verify(token!, process.env.JWT_SECRET!, async (err, info) => {
+  jwt.verify(token!, process.env.JWT_SECRET!, async (err: any, info: any) => {
     if (err) {
       if (err.name === "TokenExpiredError") expired = true;
       return;
