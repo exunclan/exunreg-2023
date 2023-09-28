@@ -13,7 +13,6 @@ const client = createClient({
 
 export const Images: { [key: string]: string } = {
   Sudocrypt: "/sudocrypt.svg",
-  Locus: "/locus.svg",
   exML: "/exML.svg",
   "Group Discussion": "/GD.svg",
   build: "/Build.svg",
@@ -29,6 +28,21 @@ export const Images: { [key: string]: string } = {
   Quiz: "/open quiz.svg",
   CubXL: "/cubxl.svg",
   "Turing Test": "/Turing.svg",
+};
+
+export const Groups: { [key: string]: { name: string; summary: string } } = {
+  ds: {
+    name: "DomainSquare+",
+    summary: "",
+  },
+  build: {
+    name: "Build",
+    summary: "",
+  },
+  rk: {
+    name: "RoboKnights",
+    summary: "",
+  },
 };
 
 export interface IEvent {

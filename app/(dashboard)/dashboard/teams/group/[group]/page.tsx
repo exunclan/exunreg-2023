@@ -7,7 +7,8 @@ import Error from "@/components/Error";
 import Loading from "@/components/Loading";
 import Image from "next/image";
 import { Row } from "@/components/Flex";
-import { Groups } from "@/util/types";
+import Card from "@/components/Card";
+import { Groups } from "@/util/data/Events";
 
 export default function DashboardEventTeamsPage({
   params,
@@ -36,34 +37,18 @@ export default function DashboardEventTeamsPage({
   return (
     <Column className="m-3">
       <div className="text-main text-4xl font-semibold text-center m-6">
-        {Groups[params.group]}
+        {Groups[params.group].name}
       </div>
 
       <Row className="flex-wrap my-4 w-full">
         {Events.map(({ name, summary, image }, i) => (
-          <a
-            href={`/dashboard/teams/${name}`}
+          <Card
             key={i}
-            className="w-3/4 lg:w-1/3 h-[15rem] m-4"
-          >
-            <div className="flex flex-col lg:flex-row items-center justify-center rounded-lg shadow-md m-4 w-full h-full">
-              <div className="flex flex-col justify-center items-center p-4">
-                <Image
-                  className="mx-12 my-10"
-                  src={image}
-                  alt={name}
-                  height={175}
-                  width={175}
-                />
-              </div>
-              <div className="flex flex-col justify-center  bg-light-blue h-full w-full py-8 pl-12 pr-6">
-                <div className="text-accent text-xl font-semibold mb-2">
-                  {name}
-                </div>
-                <div className="text-sm text-accent">{summary}</div>
-              </div>
-            </div>
-          </a>
+            link={`/dashboard/teams/${name}`}
+            image={image}
+            name={name}
+            summary={summary}
+          />
         ))}
       </Row>
     </Column>

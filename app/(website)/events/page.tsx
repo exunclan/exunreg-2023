@@ -23,8 +23,6 @@ export default function EventsPage() {
     return <>error</>;
   }
 
-  console.log(Events);
-
   return (
     <div className="my-[4rem] mx-[2rem] md:mx-[9rem]">
       <div className="text-main text-5xl md:text-6xl font-semibold">Events</div>

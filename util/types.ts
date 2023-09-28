@@ -28,9 +28,3 @@ export type User = {
   address: string;
   ncr: boolean;
 };
-
-export const Groups: { [key: string]: string } = {
-  ds: "DomainSquare+",
-  build: "Build",
-  rk: "RoboKnights",
-};
