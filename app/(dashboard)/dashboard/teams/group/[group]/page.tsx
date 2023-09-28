@@ -44,7 +44,9 @@ export default function DashboardEventTeamsPage({
         {Events.map(({ name, summary, image }, i) => (
           <Card
             key={i}
-            link={`/dashboard/teams/${name}`}
+            link={`/dashboard/teams/${name
+              .replaceAll("+", "%2B")
+              .replaceAll(" ", "%20")}`}
             image={image}
             name={name}
             summary={summary}

@@ -41,7 +41,9 @@ export default function DashboardTeamsPage() {
           {groups.map((name, i) => (
             <Card
               key={i}
-              link={`/dashboard/teams/group/${name}`}
+              link={`/dashboard/teams/group/${name
+                .replaceAll("+", "%2B")
+                .replaceAll(" ", "%20")}`}
               image={Images[name]}
               name={Groups[name].name}
               summary={Groups[name].summary}
@@ -50,7 +52,9 @@ export default function DashboardTeamsPage() {
           {filteredEvents.map(({ name, summary, image }, i) => (
             <Card
               key={i}
-              link={`/dashboard/teams/${name}`}
+              link={`/dashboard/teams/${name
+                .replaceAll("+", "%2B")
+                .replaceAll(" ", "%20")}`}
               name={name}
               summary={summary}
               image={image}
