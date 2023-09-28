@@ -43,7 +43,7 @@ export function Card({ text, image, className, long, Events }: CardParams) {
       <div
         className={`hover:shadow-md transition-all border-sub/20 border-solid border-[1px] flex ${
           long ? "flex-row sm:w-[31rem]" : "flex-col sm:w-[15rem]"
-        } justify-center items-center p-8 m-2 w-[8rem] h-[8rem] sm:h-[15rem] ${className}`}
+        } justify-center items-center p-8 m-2 w-[8rem] h-[8rem] sm:h-[15rem] cursor-pointer hover:mb-3 hover:h-[7.7rem] sm:hover:h-[14.7rem] transition-all ease-in ${className}`}
         onClick={() => setShowModal(!showModal)}
       >
         {long ? (

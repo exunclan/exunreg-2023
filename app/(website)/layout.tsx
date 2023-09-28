@@ -25,7 +25,7 @@ export default function WebsiteLayout({
             link: "/contact",
           },
           {
-            name: "Dashboard",
+            name: "Register",
             link: "/dashboard",
             background: true,
           },
