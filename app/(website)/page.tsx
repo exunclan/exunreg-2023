@@ -2,7 +2,7 @@
 
 import { Card, HeaderCard } from "@/components/EventCards";
 import { Column, Row } from "@/components/Flex";
-import { fetchEvents } from "@/util/data/Events";
+import { fetchEvents, Images, Groups } from "@/util/data/Events";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -25,6 +25,10 @@ export default function HomePage() {
     return <Error />;
   }
 
+  const groupEvents = Events.filter((x) => !!x.group);
+  const groups = Array.from(new Set(groupEvents.map((x) => x.group)));
+  const filteredEvents = Events.filter((x) => !x.group);
+
   return (
     <>
       {/* Hero */}
@@ -42,7 +46,7 @@ export default function HomePage() {
       </div>
 
       {/* Event Cards - Desktop */}
-      <div className="hidden mt-[10rem] m-8 md:flex flex-col justify-center items-center">
+      <div className="hidden mt-[10rem] m-8 lg:flex flex-col justify-center items-center">
         <Row>
           <HeaderCard />
           <Column>
@@ -55,8 +59,8 @@ export default function HomePage() {
               />
               <Card
                 Events={Events}
-                text="Locus"
-                image="/locus.svg"
+                text="Turing Test"
+                image="/Turing.svg"
                 className="rounded-b-max"
               />
               <Card
@@ -92,7 +96,7 @@ export default function HomePage() {
           />
           <Card
             Events={Events}
-            text="Robotics"
+            text="RoboKnights"
             image="/robotics.svg"
             className="rounded-max"
           />
@@ -137,7 +141,7 @@ export default function HomePage() {
             <Row>
               <Card
                 Events={Events}
-                text="Gaming"
+                text="DomainSquare+"
                 image="/gaming.svg"
                 className="rounded-max"
               />
@@ -167,10 +171,19 @@ export default function HomePage() {
       </div>
 
       {/* Event Cards - Mobile */}
-      <div className="sm:hidden flex flex-col justify-center items-center mt-[10rem] m-8">
+      <div className="lg:hidden flex flex-col justify-center items-center mt-[10rem] m-8">
         <HeaderCard />
         <div className="flex flex-row flex-wrap justify-center items-center ">
-          {Events.map(({ name, image }, i) => (
+          {groups.map((name, i) => (
+            <Card
+              Events={Events}
+              key={i}
+              text={Groups[name].name}
+              image={Images[name]}
+              className="rounded-2xl"
+            />
+          ))}
+          {filteredEvents.map(({ name, image }, i) => (
             <Card
               Events={Events}
               key={i}

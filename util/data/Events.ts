@@ -17,7 +17,7 @@ export const Images: { [key: string]: string } = {
   "Group Discussion": "/GD.svg",
   build: "/Build.svg",
   "Competitive Programming": "/CP.svg",
-  Robotics: "/robotics.svg",
+  rk: "/robotics.svg",
   SpaceTech: "/Spacetech.svg",
   Hardware: "/hardware.svg",
   Surprise: "/surprise.svg",
