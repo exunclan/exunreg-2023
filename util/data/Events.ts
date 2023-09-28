@@ -12,18 +12,21 @@ const client = createClient({
 });
 
 export const Images: { [key: string]: string } = {
+  // groups
+  build: "/Build.svg",
+  rk: "/robotics.svg",
+  ds: "/gaming.svg",
+
+  // events
   Sudocrypt: "/sudocrypt.svg",
   exML: "/exML.svg",
   "Group Discussion": "/GD.svg",
-  build: "/Build.svg",
   "Competitive Programming": "/CP.svg",
-  rk: "/robotics.svg",
   SpaceTech: "/Spacetech.svg",
   Hardware: "/hardware.svg",
   Surprise: "/surprise.svg",
   Crossword: "/cross.svg",
   "Girls In Tech": "/girls in tech.svg",
-  ds: "/gaming.svg",
   "Junior Quiz": "/junior quiz.svg",
   Quiz: "/open quiz.svg",
   CubXL: "/cubxl.svg",

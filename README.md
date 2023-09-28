@@ -35,6 +35,9 @@
 - Clone the repo
 - Copy the `.env.example` to `.env` and change the content
 - Run `pnpm install` and `pnpm run dev` (or `npm` if you prefer that)
+- If you're using a fresh Sanity content lake,
+  - Create pages for all events in Sanity Studio
+  - update the `Images` object in `/util/data/Events.ts` based on the exact name of events and groups
 
 ## Database Models
 
