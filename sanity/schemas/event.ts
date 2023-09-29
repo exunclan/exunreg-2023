@@ -58,6 +58,7 @@ export default defineType({
           { title: "Build", value: "build" },
           { title: "DomainSquare+", value: "ds" },
           { title: "RoboKnights", value: "rk" },
+          { title: "CubXL", value: "cubxl" },
         ],
       },
     }),

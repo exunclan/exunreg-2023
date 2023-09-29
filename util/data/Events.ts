@@ -16,6 +16,7 @@ export const Images: { [key: string]: string } = {
   build: "/Build.svg",
   rk: "/robotics.svg",
   ds: "/gaming.svg",
+  cubxl: "/cubxl.svg",
 
   // events
   Sudocrypt: "/sudocrypt.svg",
@@ -29,7 +30,6 @@ export const Images: { [key: string]: string } = {
   "Girls In Tech": "/girls in tech.svg",
   "Junior Quiz": "/junior quiz.svg",
   Quiz: "/open quiz.svg",
-  CubXL: "/cubxl.svg",
   "Turing Test": "/Turing.svg",
 };
 
@@ -46,6 +46,10 @@ export const Groups: { [key: string]: { name: string; summary: string } } = {
     name: "RoboKnights",
     summary: "",
   },
+  cubxl: {
+    name: "CubXL",
+    summary: "",
+  }
 };
 
 export interface IEvent {
