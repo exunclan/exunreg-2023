@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <div className="w-full border-t-2 border-sub/[0.5] flex flex-col justify-center items-center">
+    <div className="flex w-full border-t border-sub/[0.5] flex-col justify-center items-center px-2 text-center mt-12">
       <div className="text-accent m-4 flex">
         <a
           href="https://facebook.com/ExunClan"
@@ -47,14 +47,21 @@ export default function Footer() {
           </svg>
         </a>
       </div>
-      <div className="text-accent text-md flex">
-        <a href="https://exunclan.com">{"Made with <3 by Exun Clan"}</a>
-        {" | "}
-        <a href="https://lnexun.com">{"ln(exun)"}</a>
-        {" | "}
-        <a href="https://dpsrkp.net">Delhi Public School, R.K. Puram</a>
+      <div className="text-accent text-sm md:text-md flex flex-col md:flex-row">
+        <a href="https://exunclan.com" className="mx-2">
+          {"Made with <3 by Exun Clan"}
+        </a>
+        <span className="md:block hidden">{"|"}</span>
+        <a href="https://lnexun.com" className="mx-2">
+          {"Natural log of Exun - ln(exun)"}
+        </a>
+
+        <span className="md:block hidden">{"|"}</span>
+        <a href="https://dpsrkp.net" className="mx-2">
+          Delhi Public School, R.K. Puram
+        </a>
       </div>
-      <div className="text-accent text-sm">
+      <div className="text-accent text-xs md:text-sm mt-1 mb-5">
         © 2023-24 Exun Clan and DPS RK Puram, New Delhi, India
       </div>
     </div>

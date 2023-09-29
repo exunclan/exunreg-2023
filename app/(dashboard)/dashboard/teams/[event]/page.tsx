@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth/next";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/util/auth";
 import { Column } from "@/components/Flex";
 import TeamData from "@/components/TeamData";
 

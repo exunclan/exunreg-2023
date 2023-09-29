@@ -16,7 +16,7 @@ export default function DashboardPage() {
 
   return (
     <Column className="w-full my-4">
-      <div className="text-4xl text-main font-semibold">
+      <div className="text-4xl text-main font-semibold text-center">
         Welcome {session?.user?.name}!
       </div>
       <div className="flex flex-col m-6 my-[3rem] w-[80vw] md:w-1/3">
