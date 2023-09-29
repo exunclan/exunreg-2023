@@ -42,6 +42,7 @@ export default function SignIn() {
     if (res.error) {
       if (res.error === "user_already_exists")
         setError("User with the given email already exists.");
+      return;
     } else setSuccess(true);
 
     setLoading(false);
