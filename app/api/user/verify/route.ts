@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     expired = false;
 
   // Verify token
-  jwt.verify(token!, process.env.JWT_SECRET!, async (err, info) => {
+  jwt.verify(token!, process.env.JWT_SECRET!, async (err: any, info: any) => {
     if (err) {
       if (err.name === "TokenExpiredError") expired = true;
       return;
@@ -121,22 +121,14 @@ export async function POST(req: NextRequest) {
       {
         expiresIn: "24hr",
       },
-      (err, token) => {
+      async (err, token) => {
         if (err) {
           return new NextResponse(JSON.stringify(err));
         }
 
         const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-        transporter.sendMail(emailOptions(url, email), (err, _) => {
-          if (err) {
-            console.log(err);
-            return new NextResponse(JSON.stringify(err));
-          }
-
-          /* // For test account
-          console.log(nodemailer.getTestMessageUrl(_)); */
-        });
+        await transporter.sendMail(emailOptions(url, email));
       }
     );
   }
@@ -152,22 +144,14 @@ export async function POST(req: NextRequest) {
       {
         expiresIn: "24hr",
       },
-      (err, token) => {
+      async (err, token) => {
         if (err) {
           return new NextResponse(JSON.stringify(err));
         }
 
         const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-        transporter.sendMail(emailOptions(url, teacherEmail), (err, _) => {
-          if (err) {
-            console.log(err);
-            return new NextResponse(JSON.stringify(err));
-          }
-
-          /* // For test account
-          console.log(nodemailer.getTestMessageUrl(_)); */
-        });
+        await transporter.sendMail(emailOptions(url, teacherEmail));
       }
     );
   }

@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { SessionProvider } from "next-auth/react";
 
 export default function WebsiteLayout({
@@ -10,28 +11,33 @@ export default function WebsiteLayout({
 }) {
   return (
     <div>
-      <Navbar
-        Links={[
-          {
-            name: "Home",
-            link: "/",
-          },
-          {
-            name: "Events",
-            link: "/events",
-          },
-          {
-            name: "Contact",
-            link: "/contact",
-          },
-          {
-            name: "Dashboard",
-            link: "/dashboard",
-            background: true,
-          },
-        ]}
-      />
-      <SessionProvider>{children}</SessionProvider>
+      <div className="min-h-screen flex flex-col">
+        <Navbar
+          Links={[
+            {
+              name: "Home",
+              link: "/",
+            },
+            {
+              name: "Events",
+              link: "/events",
+            },
+            {
+              name: "Contact",
+              link: "/contact",
+            },
+            {
+              name: "Register",
+              link: "/dashboard",
+              background: true,
+            },
+          ]}
+        />
+        <SessionProvider>
+          <div className="flex-1">{children}</div>
+        </SessionProvider>
+      </div>
+      <Footer />
     </div>
   );
 }

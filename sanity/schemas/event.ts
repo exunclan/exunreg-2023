@@ -17,13 +17,13 @@ export default defineType({
       description: "The classes for which the event is open for. Ex: IX-XII",
     }),
     defineField({
-      name: "participants",
-      title: "Max. Participants per team",
+      name: "teams",
+      title: "Max. number of teams",
       type: "number",
     }),
     defineField({
-      name: "teams",
-      title: "Max. number of teams",
+      name: "participants",
+      title: "Max. Participants per team",
       type: "number",
     }),
     defineField({
@@ -39,7 +39,7 @@ export default defineType({
     defineField({
       name: "summary",
       title: "Summary of the event",
-      description: "To be shown in the modal",
+      description: "To be shown in the ",
       type: "text",
     }),
     defineField({
@@ -48,6 +48,19 @@ export default defineType({
       description: "Put each bullet point in new text box",
       type: "array",
       of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "group",
+      title: "Event Group",
+      type: "string",
+      options: {
+        list: [
+          { title: "Build", value: "build" },
+          { title: "DomainSquare+", value: "ds" },
+          { title: "RoboKnights", value: "rk" },
+          { title: "CubXL", value: "cubxl" },
+        ],
+      },
     }),
   ],
   preview: {

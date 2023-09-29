@@ -14,7 +14,7 @@ export async function GET(
 
   // Get event
   let { event } = params;
-  event = event.replaceAll("%20", " ");
+  event = event.replaceAll("%20", " ").replaceAll("%2B", "+");
 
   // Initialize db
   const db = client.db("reg-2023");
@@ -48,7 +48,7 @@ export async function POST(
 
   // Get event
   let { event } = params;
-  event = event.replaceAll("%20", " ");
+  event = event.replaceAll("%20", " ").replaceAll("%2B", "+");
 
   // Initialize db
   const db = client.db("reg-2023");

@@ -11,23 +11,45 @@ const client = createClient({
   useCdn: false,
 });
 
-const Images: { [key: string]: string } = {
+export const Images: { [key: string]: string } = {
+  // groups
+  build: "/Build.svg",
+  rk: "/robotics.svg",
+  ds: "/gaming.svg",
+  cubxl: "/cubxl.svg",
+
+  // events
   Sudocrypt: "/sudocrypt.svg",
-  Locus: "/locus.svg",
   exML: "/exML.svg",
   "Group Discussion": "/GD.svg",
-  Build: "/Build.svg",
   "Competitive Programming": "/CP.svg",
-  Robotics: "/robotics.svg",
   SpaceTech: "/Spacetech.svg",
   Hardware: "/hardware.svg",
   Surprise: "/surprise.svg",
   Crossword: "/cross.svg",
-  "Girls in Tech": "/girls in tech.svg",
-  Gaming: "/gaming.svg",
+  "Girls In Tech": "/girls in tech.svg",
   "Junior Quiz": "/junior quiz.svg",
-  "Open Quiz": "/open quiz.svg",
-  CubXL: "/cubxl.svg",
+  Quiz: "/open quiz.svg",
+  "Turing Test": "/Turing.svg",
+};
+
+export const Groups: { [key: string]: { name: string; summary: string } } = {
+  ds: {
+    name: "DomainSquare+",
+    summary: "",
+  },
+  build: {
+    name: "Build",
+    summary: "",
+  },
+  rk: {
+    name: "RoboKnights",
+    summary: "",
+  },
+  cubxl: {
+    name: "CubXL",
+    summary: "",
+  }
 };
 
 export interface IEvent {
@@ -39,6 +61,7 @@ export interface IEvent {
   registrations: boolean;
   image: string;
   summary: string;
+  group: string;
   description: string[];
 }
 
@@ -58,6 +81,9 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
   return new Promise((resolve, reject) => {
     resolve(
       data.map((x) => {
+        let image =
+          Images[x.name] === undefined ? Images[x.group] : Images[x.name];
+
         return {
           description: x.description,
           registrations: x.registrations,
@@ -67,7 +93,8 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
           teams: x.teams,
           summary: x.summary,
           independent: x.independent,
-          image: Images[x.name],
+          group: x.group,
+          image,
         };
       })
     );
