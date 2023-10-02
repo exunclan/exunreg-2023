@@ -128,7 +128,15 @@ export async function POST(req: NextRequest) {
 
         const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-        await transporter.sendMail(emailOptions(url, email));
+        await transporter.sendMail(emailOptions(url, email), (err, _) => {
+          if (err) {
+            console.log(err);
+            return new NextResponse(JSON.stringify(err));
+          }
+
+          /* // For test account
+          console.log(nodemailer.getTestMessageUrl(_)); */
+        });
       }
     );
   }

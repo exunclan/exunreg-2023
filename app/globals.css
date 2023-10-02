@@ -21,3 +21,32 @@ body::-webkit-scrollbar {
 .header-card {
   background: linear-gradient(180deg, #37baf2 0%, #2977f5 100%);
 }
+
+.invite-introduction p {
+  @apply my-3 text-justify;
+}
+
+.invite-introduction h2 {
+  @apply text-gray-700 text-2xl font-bold;
+}
+
+.invite-introduction a {
+  color: #2977f5;
+  @apply font-bold;
+}
+
+.rules ul {
+  @apply list-disc ml-6 my-4;
+}
+
+.rules li {
+  @apply my-2 text-justify;
+}
+
+.invite-navbar .link {
+  transition: transform 0.3s ease;
+}
+
+.invite-navbar .link:hover {
+  transform: translateX(10px);
+}

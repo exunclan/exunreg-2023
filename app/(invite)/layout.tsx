@@ -1,10 +1,9 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { SessionProvider } from "next-auth/react";
 
-export default function WebsiteLayout({
+export default function InviteLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
@@ -16,15 +15,23 @@ export default function WebsiteLayout({
           Links={[
             {
               name: "Home",
-              link: "/",
+              link: "/invite",
+            },
+            {
+              name: "Glossary",
+              link: "/invite/glossary",
             },
             {
               name: "Events",
-              link: "/events",
+              link: "/invite/events",
             },
             {
-              name: "Sign In",
-              link: "/user/signin",
+              name: "Schedule",
+              link: "https://exun.co/schedule",
+            },
+            {
+              name: "Code of Conduct",
+              link: "https://exun.co/code",
             },
             {
               name: "Register",
@@ -33,11 +40,11 @@ export default function WebsiteLayout({
             },
           ]}
         />
+
         <SessionProvider>
           <div className="flex-1">{children}</div>
         </SessionProvider>
       </div>
-      <Footer />
     </div>
   );
 }
