@@ -2,6 +2,7 @@
 
 import { fetchEvents } from "@/util/data/Events";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import EventDescription from "@/components/EventDescription";
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
@@ -16,6 +17,8 @@ export default function EventsPage() {
     queryFn: fetchEvents,
   });
 
+  const [query, setQuery] = useState<string>("");
+
   if (isLoading) return <Loading />;
 
   if (!Events || error) return <Error />;
@@ -23,8 +26,23 @@ export default function EventsPage() {
   return (
     <div className="my-[4rem] mx-[2rem] md:mx-[9rem]">
       <div className="text-main text-5xl md:text-6xl font-semibold">Events</div>
+      <div className="input-group my-5">
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(e) => {
+            setQuery(e.target.value as string);
+          }}
+        />
+      </div>
       <div>
-        {Events.map(
+        {Events.filter((obj: { [key: string]: any }) =>
+          Object.keys(obj).some(
+            (key) =>
+              typeof obj[key] === "string" &&
+              obj[key].toLowerCase().includes(query.toLowerCase())
+          )
+        ).map(
           (
             {
               name,
