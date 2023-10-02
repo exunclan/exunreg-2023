@@ -67,7 +67,7 @@ export default function LayoutPage() {
                     label: "Prizes &amp; Overall Trophy",
                     scroll: scrollToPrizesRef,
                   },
-                  { label: "Sudocrypt v12.0", scroll: scrollToSudoRef },
+                  { label: "Sudocrypt v13.0", scroll: scrollToSudoRef },
                   {
                     label: "Dates &amp; Exun Week</h2>",
                     scroll: scrollToDatesRef,
