@@ -68,11 +68,12 @@ export default function EventDescription({
       </div>
       <div>
         <ul className="marker:text-accent-light list-disc p-7">
-          {description.map((x, j) => (
-            <li key={j} className="text-accent-light text-lg font-light">
-              {x}
-            </li>
-          ))}
+          {description &&
+            description.map((x, j) => (
+              <li key={j} className="text-accent-light text-lg font-light">
+                {x}
+              </li>
+            ))}
         </ul>
       </div>
       <div className="md:hidden border-dashed border border-gray-300 w-2/3 my-2"></div>
