@@ -51,6 +51,7 @@ export default function EventsPage() {
               independent,
               registrations,
               image,
+              summary,
               description,
             },
             i
@@ -64,6 +65,7 @@ export default function EventsPage() {
               independent={independent}
               registrations={registrations}
               image={image}
+              summary={summary}
               description={description}
             />
           )

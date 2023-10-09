@@ -15,6 +15,7 @@ export default function EventDescription({
   registrations,
   image,
   description,
+  summary,
 }: {
   name: string;
   classes: string;
@@ -23,6 +24,7 @@ export default function EventDescription({
   independent: boolean;
   registrations: boolean;
   image: string;
+  summary: string;
   description: string[];
 }) {
   return (
@@ -65,6 +67,9 @@ export default function EventDescription({
             className="md:mr-6"
           />
         </div>
+      </div>
+      <div className="text-accent light-disc pt-5 text-lg font-medium max-w-4xl">
+        {summary && summary}
       </div>
       <div>
         <ul className="marker:text-accent-light list-disc p-7">
