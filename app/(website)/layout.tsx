@@ -27,7 +27,7 @@ export default function WebsiteLayout({
               link: "/user/signin",
             },
             {
-              name: "Register",
+              name: "Dashboard",
               link: "/dashboard",
               background: true,
             },

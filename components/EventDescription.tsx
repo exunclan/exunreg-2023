@@ -15,6 +15,7 @@ export default function EventDescription({
   registrations,
   image,
   description,
+  summary,
 }: {
   name: string;
   classes: string;
@@ -23,6 +24,7 @@ export default function EventDescription({
   independent: boolean;
   registrations: boolean;
   image: string;
+  summary: string;
   description: string[];
 }) {
   return (
@@ -66,13 +68,17 @@ export default function EventDescription({
           />
         </div>
       </div>
+      <div className="text-accent light-disc pt-5 text-lg font-medium max-w-4xl">
+        {summary && summary}
+      </div>
       <div>
         <ul className="marker:text-accent-light list-disc p-7">
-          {description.map((x, j) => (
-            <li key={j} className="text-accent-light text-lg font-light">
-              {x}
-            </li>
-          ))}
+          {description &&
+            description.map((x, j) => (
+              <li key={j} className="text-accent-light text-lg font-light">
+                {x}
+              </li>
+            ))}
         </ul>
       </div>
       <div className="md:hidden border-dashed border border-gray-300 w-2/3 my-2"></div>
