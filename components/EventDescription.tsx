@@ -27,6 +27,8 @@ export default function EventDescription({
   summary: string;
   description: string[];
 }) {
+  console.log(summary);
+
   return (
     <div
       id={name.split(" ").join()}
@@ -68,11 +70,11 @@ export default function EventDescription({
           />
         </div>
       </div>
-      <div className="text-accent light-disc pt-5 text-lg font-medium max-w-4xl">
+      <div className="text-accent light-disc pt-5 text-lg font-medium max-w-4xl whitespace-pre-line">
         {summary && summary}
       </div>
       <div>
-        <ul className="marker:text-accent-light list-disc p-7">
+        <ul className="marker:text-accent-light list-disc p-7 ">
           {description &&
             description.map((x, j) => (
               <li key={j} className="text-accent-light text-lg font-light">
