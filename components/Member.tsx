@@ -79,10 +79,15 @@ export default function Member({
   const classLimits = eventData.classes.split("-");
   const classMin = classes.indexOf(classLimits[0]),
     classMax = classes.indexOf(classLimits[1]);
-  const classRange = classes.slice(
+  let classRange = classes.slice(
     classMin,
     classMax === -1 ? classMin + 1 : classMax + 1
   );
+
+  classRange =
+    classRange.length === 0
+      ? ["VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+      : classRange;
 
   const handleSave = handleSubmit(async (formData) => {
     setLoading(true);
