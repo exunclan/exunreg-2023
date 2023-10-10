@@ -37,6 +37,18 @@ export default defineType({
       type: "boolean",
     }),
     defineField({
+      name: "mode",
+      title: "Event Mode",
+      type: "string",
+      options: {
+        list: [
+          { title: "Online", value: "Online" },
+          { title: "Offline", value: "Offline" },
+          { title: "Hybrid", value: "Hybrid" },
+        ],
+      },
+    }),
+    defineField({
       name: "summary",
       title: "Summary of the event",
       description: "To be shown in the ",

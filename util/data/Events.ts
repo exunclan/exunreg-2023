@@ -49,7 +49,7 @@ export const Groups: { [key: string]: { name: string; summary: string } } = {
   cubxl: {
     name: "CubXL",
     summary: "",
-  }
+  },
 };
 
 export interface IEvent {
@@ -57,6 +57,7 @@ export interface IEvent {
   classes: string;
   participants: number;
   teams: number;
+  mode: string;
   independent: boolean;
   registrations: boolean;
   image: string;
@@ -90,6 +91,7 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
           classes: x.classes,
           name: x.name,
           participants: x.participants,
+          mode: x.mode,
           teams: x.teams,
           summary: x.summary,
           independent: x.independent,

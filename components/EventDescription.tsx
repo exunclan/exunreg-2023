@@ -14,6 +14,7 @@ export default function EventDescription({
   independent,
   registrations,
   image,
+  mode,
   description,
   summary,
 }: {
@@ -24,6 +25,7 @@ export default function EventDescription({
   independent: boolean;
   registrations: boolean;
   image: string;
+  mode: string;
   summary: string;
   description: string[];
 }) {
@@ -46,6 +48,7 @@ export default function EventDescription({
             <span className="font-medium">{teams}</span> <br />
             Maximum participants per team:{" "}
             <span className="font-medium">{participants}</span> <br />
+            Mode: <span className="font-medium">{mode}</span> <br />
             Independent Registration:{" "}
             <span className="font-medium">
               {independent ? "Allowed" : "Not Allowed"} <br />
