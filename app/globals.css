@@ -7,8 +7,21 @@
   padding: 0;
 }
 body::-webkit-scrollbar {
-  /* TODO: add a scrollbar */
-  display: none;
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .button-background {
