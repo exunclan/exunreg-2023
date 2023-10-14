@@ -20,6 +20,7 @@ export const Images: { [key: string]: string } = {
 
   // events
   Sudocrypt: "/sudocrypt.svg",
+  "Audio Production": "/audio.png",
   ExML: "/exML.svg",
   "Group Discussion": "/GD.svg",
   "Competitive Programming": "/CP.svg",
@@ -122,7 +123,9 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
       newData.find((x) => x.name === "CubXL Pyraminx")!,
       newData.find((x) => x.name === "CubXL Surprise")!,
       newData.find((x) => x.name === "Roboknights: Robosoccer")!,
-      newData.find((x) => x.name === "Roboknights: Line Following Robot")!,
+      newData.find(
+        (x) => x.name === "Roboknights: Mx+C V5.0 Line Following Robot"
+      )!,
     ]);
   });
 };
