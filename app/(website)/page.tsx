@@ -69,7 +69,7 @@ export default function HomePage() {
               />
               <Card
                 Events={Events}
-                text="exML"
+                text="ExML"
                 image="/exML.svg"
                 className="rounded-se-max rounded-es-max"
               />
