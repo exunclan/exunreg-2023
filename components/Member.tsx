@@ -26,6 +26,7 @@ type FormData = {
   email: string;
   phone: string;
   role: string;
+  codechef: string;
   class: ClassEnum;
 };
 
@@ -56,6 +57,7 @@ export default function Member({
       email: data.email,
       phone: data.phone,
       role: data.role || "Member",
+      codechef: data.codechef || "N/A",
       class: data.class as ClassEnum,
     },
   });
@@ -180,6 +182,17 @@ export default function Member({
                 {...register("role")}
               />
             </div>
+
+            {eventData.name === "Competitive Programming" && (
+              <div className="flex flex-col my-3">
+                <label className="text-sm text-accent">CodeChef Handle</label>
+                <input
+                  required
+                  className="border border-sub rounded-md p-2 text-accent-light"
+                  {...register("codechef")}
+                />
+              </div>
+            )}
 
             <div className="flex flex-row justify-end items-center">
               {isDirty && (

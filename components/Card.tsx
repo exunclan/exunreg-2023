@@ -25,7 +25,7 @@ export default function Card({
         </div>
         <div className="flex flex-col justify-center rounded-r-lg bg-light-blue h-full w-full py-8 pl-6 md:pl-12 pr-6">
           <div className="text-accent text-xl font-semibold mb-2">{name}</div>
-          <div className="text-sm text-accent">{summary}</div>
+          {/* <div className="text-sm text-accent">{summary}</div> */}
         </div>
       </div>
     </a>

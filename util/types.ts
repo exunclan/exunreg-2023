@@ -6,6 +6,7 @@ export type TeamMember = {
   class: string;
   email: string;
   phone: string;
+  codechef?: string;
   role?: string;
 };
 

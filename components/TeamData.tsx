@@ -81,17 +81,17 @@ export default function TeamData({
           removeMember={removeMember}
         />
       ))}
-      {eventData.teams === -1
+      {(eventData.teams === -1
         ? true
-        : members.length < eventData.teams * eventData.participants && (
-            <div
-              className="my-2 p-2 bg-main text-white flex flex-row justify-center items-center rounded-md cursor-pointer"
-              onClick={() => addMember()}
-            >
-              <AiOutlinePlus className="mx-2" />
-              Add Member
-            </div>
-          )}
+        : members.length < eventData.teams * eventData.participants) && (
+        <div
+          className="my-2 p-2 bg-main text-white flex flex-row justify-center items-center rounded-md cursor-pointer"
+          onClick={() => addMember()}
+        >
+          <AiOutlinePlus className="mx-2" />
+          Add Member
+        </div>
+      )}
     </div>
   );
 }
