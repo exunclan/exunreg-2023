@@ -106,8 +106,8 @@ export default function HomePage() {
           />
           <Card
             Events={Events}
-            text="SpaceTech"
-            image="/Spacetech.svg"
+            text="Audio Production"
+            image="/audio.png"
             className="rounded-max"
           />
           <Card
