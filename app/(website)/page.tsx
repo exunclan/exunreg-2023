@@ -135,7 +135,7 @@ export default function HomePage() {
               />
               <Card
                 Events={Events}
-                text="Girls in Tech"
+                text="Girls In Tech"
                 image="girls in tech.svg"
                 className="rounded-t-max"
               />
@@ -159,7 +159,7 @@ export default function HomePage() {
             <Row>
               <Card
                 Events={Events}
-                text="Open Quiz"
+                text="Quiz"
                 image="/open quiz.svg"
                 className="rounded-t-max"
               />
