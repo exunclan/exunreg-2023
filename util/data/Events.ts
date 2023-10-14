@@ -20,7 +20,7 @@ export const Images: { [key: string]: string } = {
 
   // events
   Sudocrypt: "/sudocrypt.svg",
-  exML: "/exML.svg",
+  ExML: "/exML.svg",
   "Group Discussion": "/GD.svg",
   "Competitive Programming": "/CP.svg",
   SpaceTech: "/Spacetech.svg",
@@ -80,25 +80,49 @@ interface IData extends Omit<IEvent, "image"> {
 export const fetchEvents = async (): Promise<IEvent[]> => {
   const data = await client.fetch<IData[]>(groq`*[_type=="event"]`);
   return new Promise((resolve, reject) => {
-    resolve(
-      data.map((x) => {
-        let image =
-          Images[x.name] === undefined ? Images[x.group] : Images[x.name];
+    const newData = data.map((x) => {
+      let image =
+        Images[x.name] === undefined ? Images[x.group] : Images[x.name];
 
-        return {
-          description: x.description,
-          registrations: x.registrations,
-          classes: x.classes,
-          name: x.name,
-          participants: x.participants,
-          mode: x.mode,
-          teams: x.teams,
-          summary: x.summary,
-          independent: x.independent,
-          group: x.group,
-          image,
-        };
-      })
-    );
+      return {
+        description: x.description,
+        registrations: x.registrations,
+        classes: x.classes,
+        name: x.name,
+        participants: x.participants,
+        mode: x.mode,
+        teams: x.teams,
+        summary: x.summary,
+        independent: x.independent,
+        group: x.group,
+        image,
+      };
+    });
+
+    resolve([
+      newData.find((x) => x.name === "Build: Hackathon")!,
+      newData.find((x) => x.name === "Build: Designathon")!,
+      newData.find((x) => x.name === "Build: Unreality")!,
+      newData.find((x) => x.name === "Audio Production")!,
+      newData.find((x) => x.name === "Competitive Programming")!,
+      newData.find((x) => x.name === "Sudocrypt")!,
+      newData.find((x) => x.name === "Turing Test")!,
+      newData.find((x) => x.name === "Quiz")!,
+      newData.find((x) => x.name === "Junior Quiz")!,
+      newData.find((x) => x.name === "Crossword")!,
+      newData.find((x) => x.name === "Hardware")!,
+      newData.find((x) => x.name === "ExML")!,
+      newData.find((x) => x.name === "Girls In Tech")!,
+      newData.find((x) => x.name === "Group Discussion")!,
+      newData.find((x) => x.name === "DomainSquare+ Gaming: PC")!,
+      newData.find((x) => x.name === "DomainSquare+ Gaming: Surprise")!,
+      newData.find((x) => x.name === "DomainSquare+ Gaming: Quiz")!,
+      newData.find((x) => x.name === "CubXL 2x2")!,
+      newData.find((x) => x.name === "CubXL 3x3")!,
+      newData.find((x) => x.name === "CubXL Pyraminx")!,
+      newData.find((x) => x.name === "CubXL Surprise")!,
+      newData.find((x) => x.name === "Roboknights: Robosoccer")!,
+      newData.find((x) => x.name === "Roboknights: Line Following Robot")!,
+    ]);
   });
 };

@@ -45,7 +45,10 @@ export default function EventDescription({
             Open for classes <span className="font-medium">{classes}</span>{" "}
             <br />
             Maximum teams per school:{" "}
-            <span className="font-medium">{teams}</span> <br />
+            <span className="font-medium">
+              {teams === -1 ? "∞" : teams}
+            </span>{" "}
+            <br />
             Maximum participants per team:{" "}
             <span className="font-medium">{participants}</span> <br />
             Mode: <span className="font-medium">{mode}</span> <br />
