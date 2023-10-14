@@ -37,11 +37,15 @@ export default function HomePage() {
           The biggest tech symposium of India
         </div>
         <div className="flex-1 bg-red"> {/* illustration */}</div>
-        <div className="text-accent-light text-sm sm:text-lg max-w-xs sm:max-w-2xl text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis,
-          nostrum atque non iure reiciendis provident ab, hic officia eaque quos
-          debitis, fugiat temporibus. Explicabo tempora sequi, placeat veniam
-          eius necessitatibus cum sapiente sit
+        <div className="text-accent-light text-sm sm:text-lg max-w-xs sm:max-w-3xl text-center">
+          Exun 2023, a plethora of events and a profusion of memories, awaits
+          you. The 28th iteration of Exun Clan's annual international technology
+          symposium is being organized on 4th and 5th November, with the
+          preliminary rounds starting from 27th October. Budding from the
+          success of Exun 2022 with over 22,000 participants both from India and
+          across the globe, we hope Exun 2023 scales to new heights. Check out
+          our list of events below, with something for every variety of tech
+          enthusiasts!
         </div>
       </div>
 
