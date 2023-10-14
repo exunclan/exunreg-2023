@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
     }); */
 
   // Initialize nodemailer
-  const transporter = nodemailer.createTransport({
+  const transporter = await nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -96,6 +96,20 @@ export async function POST(req: NextRequest) {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_PASS,
     },
+  });
+
+  // verify connection configuration
+  await new Promise((resolve, reject) => {
+    transporter.verify(function (err, success) {
+      if (err) {
+        console.log(err);
+        reject(err);
+        return new NextResponse(JSON.stringify(err));
+      } else {
+        console.log("Server is ready to take our messages");
+        resolve(success);
+      }
+    });
   });
 
   // Function to generate emailOptions
@@ -128,14 +142,20 @@ export async function POST(req: NextRequest) {
 
         const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-        await transporter.sendMail(emailOptions(url, email), (err, _) => {
-          if (err) {
-            console.log(err);
-            return new NextResponse(JSON.stringify(err));
-          }
+        await new Promise((resolve, reject) => {
+          transporter.sendMail(emailOptions(url, email), (err, info) => {
+            if (err) {
+              console.log(err);
+              reject(err);
+              return new NextResponse(JSON.stringify(err));
+            }
 
-          /* // For test account
+            console.log(info);
+            resolve(info);
+
+            /* // For test account
           console.log(nodemailer.getTestMessageUrl(_)); */
+          });
         });
       }
     );
@@ -159,7 +179,18 @@ export async function POST(req: NextRequest) {
 
         const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-        await transporter.sendMail(emailOptions(url, teacherEmail));
+        await new Promise((resolve, reject) => {
+          transporter.sendMail(emailOptions(url, teacherEmail), (err, info) => {
+            if (err) {
+              console.log(err);
+              reject(err);
+              return new NextResponse(JSON.stringify(err));
+            }
+
+            console.log(info);
+            resolve(info);
+          });
+        });
       }
     );
   }
