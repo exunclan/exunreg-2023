@@ -102,11 +102,9 @@ export async function POST(req: NextRequest) {
   await new Promise((resolve, reject) => {
     transporter.verify(function (err, success) {
       if (err) {
-        console.log(err);
         reject(err);
         return new NextResponse(JSON.stringify(err));
       } else {
-        console.log("Server is ready to take our messages");
         resolve(success);
       }
     });
@@ -145,12 +143,10 @@ export async function POST(req: NextRequest) {
         await new Promise((resolve, reject) => {
           transporter.sendMail(emailOptions(url, email), (err, info) => {
             if (err) {
-              console.log(err);
               reject(err);
               return new NextResponse(JSON.stringify(err));
             }
 
-            console.log(info);
             resolve(info);
 
             /* // For test account
@@ -182,12 +178,10 @@ export async function POST(req: NextRequest) {
         await new Promise((resolve, reject) => {
           transporter.sendMail(emailOptions(url, teacherEmail), (err, info) => {
             if (err) {
-              console.log(err);
               reject(err);
               return new NextResponse(JSON.stringify(err));
             }
 
-            console.log(info);
             resolve(info);
           });
         });
