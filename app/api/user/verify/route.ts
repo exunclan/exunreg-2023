@@ -124,7 +124,7 @@ export async function POST(req: NextRequest) {
 
   // Sign jwt token if email exists
   if (email) {
-    jwt.sign(
+    let token = jwt.sign(
       {
         email: email,
         emailType: "email",
@@ -132,34 +132,29 @@ export async function POST(req: NextRequest) {
       process.env.JWT_SECRET!,
       {
         expiresIn: "24hr",
-      },
-      async (err, token) => {
+      }
+    );
+
+    const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(emailOptions(url, email), (err, info) => {
         if (err) {
+          reject(err);
           return new NextResponse(JSON.stringify(err));
         }
 
-        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+        resolve(info);
 
-        await new Promise((resolve, reject) => {
-          transporter.sendMail(emailOptions(url, email), (err, info) => {
-            if (err) {
-              reject(err);
-              return new NextResponse(JSON.stringify(err));
-            }
-
-            resolve(info);
-
-            /* // For test account
+        /* // For test account
           console.log(nodemailer.getTestMessageUrl(_)); */
-          });
-        });
-      }
-    );
+      });
+    });
   }
 
   // Sign jwt token if teacherEmail exists
   if (teacherEmail) {
-    jwt.sign(
+    let token = jwt.sign(
       {
         email: teacherEmail,
         emailType: "teacher",
@@ -167,28 +162,22 @@ export async function POST(req: NextRequest) {
       process.env.JWT_SECRET!,
       {
         expiresIn: "24hr",
-      },
-      async (err, token) => {
+      }
+    );
+
+    const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(emailOptions(url, teacherEmail), (err, info) => {
         if (err) {
+          reject(err);
           return new NextResponse(JSON.stringify(err));
         }
 
-        const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
-
-        await new Promise((resolve, reject) => {
-          transporter.sendMail(emailOptions(url, teacherEmail), (err, info) => {
-            if (err) {
-              reject(err);
-              return new NextResponse(JSON.stringify(err));
-            }
-
-            resolve(info);
-          });
-        });
-      }
-    );
+        resolve(info);
+      });
+    });
   }
-  // });
 
   return new NextResponse("Verificaion email sent");
 }
