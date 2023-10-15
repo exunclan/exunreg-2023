@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Initialize nodemailer
-  const transporter = nodemailer.createTransport({
+  const transporter = await nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -29,6 +29,18 @@ export async function POST(req: NextRequest) {
       user: process.env.GMAIL_USER,
       pass: process.env.GMAIL_PASS,
     },
+  });
+
+  // verify connection configuration
+  await new Promise((resolve, reject) => {
+    transporter.verify(function (err, success) {
+      if (err) {
+        reject(err);
+        return new NextResponse(JSON.stringify(err));
+      } else {
+        resolve(success);
+      }
+    });
   });
 
   // Function to generate emailOptions
@@ -51,18 +63,22 @@ export async function POST(req: NextRequest) {
     {
       expiresIn: "1h",
     },
-    (err: any, token: any) => {
+    async (err: any, token: any) => {
       if (err) {
         return new NextResponse(JSON.stringify(err));
       }
 
       const url = `${process.env.NEXT_PUBLIC_URL}/user/reset?token=${token}`;
 
-      transporter.sendMail(emailOptions(url, email), (err, _) => {
-        if (err) {
-          console.log(err);
-          return new NextResponse(JSON.stringify(err));
-        }
+      await new Promise((resolve, reject) => {
+        transporter.sendMail(emailOptions(url, email), (err, info) => {
+          if (err) {
+            reject(err);
+            return new NextResponse(JSON.stringify(err));
+          }
+
+          resolve(info);
+        });
       });
     }
   );
