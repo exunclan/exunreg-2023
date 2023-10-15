@@ -63,3 +63,12 @@ body::-webkit-scrollbar-thumb:hover {
 .invite-navbar .link:hover {
   transform: translateX(10px);
 }
+
+tr {
+  width: 100%;
+  padding: 0;
+}
+
+/* td {
+  padding: 0.1rem 0.25rem;
+} */

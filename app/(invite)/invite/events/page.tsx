@@ -59,6 +59,7 @@ export default function EventsPage() {
           ) => (
             <EventDescription
               key={i}
+              idx={i + 1}
               name={name}
               classes={classes}
               participants={participants}
