@@ -36,7 +36,9 @@ export default function HomePage() {
         <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
           The biggest tech symposium of India
         </div>
-        <div className="flex-1 bg-red"> {/* illustration */}</div>
+        <div className="flex-1 bg-red">
+          <img src="/illusss.png" alt="Illustration" height="400" width="400" />
+        </div>
         <div className="text-accent-light text-sm sm:text-lg max-w-xs sm:max-w-3xl text-center">
           Exun 2023, a plethora of events and a profusion of memories, awaits
           you. The 28th iteration of Exun Clan's annual international technology
