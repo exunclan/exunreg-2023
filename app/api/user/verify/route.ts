@@ -111,13 +111,28 @@ export async function POST(req: NextRequest) {
   });
 
   // Function to generate emailOptions
-  const emailOptions = (url: string, to: string) => {
+  const emailOptions = (url: string, to: string, teacher: boolean) => {
+    const tokens = JSON.parse(process.env.DISCORD_VERIFICATION_TOKENS || "[]");
+    const randomToken = tokens[Math.floor(Math.random() * tokens.length)];
+    console.log(randomToken);
+
     return {
-      from: "Exunclan <exun@dpsrkp.net>",
+      from: "Exun Clan <exun@dpsrkp.net>",
       to: to,
-      subject: "Exun email verification",
+      subject: `Exun 2023 ${teacher ? "Teacher In-charge" : ""}Verification`,
       html: `
-			<p>Please click on the following link to verify your email for Exun 2023. <br><br> <a href="${url}">${url}</a></p>
+			<p>
+        Please click on the following link to verify your email for Exun 2023. <br><br> 
+        <a href="${url}">
+          ${url}
+        </a>
+        <br><br>
+        ${
+          teacher
+            ? `Discord server verification token: <b>${randomToken}</b>`
+            : ""
+        }
+      </p>
 			`,
     };
   };
@@ -138,7 +153,7 @@ export async function POST(req: NextRequest) {
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
     await new Promise((resolve, reject) => {
-      transporter.sendMail(emailOptions(url, email), (err, info) => {
+      transporter.sendMail(emailOptions(url, email, false), (err, info) => {
         if (err) {
           reject(err);
           return new NextResponse(JSON.stringify(err));
@@ -168,14 +183,17 @@ export async function POST(req: NextRequest) {
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
     await new Promise((resolve, reject) => {
-      transporter.sendMail(emailOptions(url, teacherEmail), (err, info) => {
-        if (err) {
-          reject(err);
-          return new NextResponse(JSON.stringify(err));
-        }
+      transporter.sendMail(
+        emailOptions(url, teacherEmail, true),
+        (err, info) => {
+          if (err) {
+            reject(err);
+            return new NextResponse(JSON.stringify(err));
+          }
 
-        resolve(info);
-      });
+          resolve(info);
+        }
+      );
     });
   }
 

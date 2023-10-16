@@ -39,13 +39,13 @@ export default function SignIn() {
       body: JSON.stringify(data),
     }).then((res) => res.json());
 
+    setLoading(false);
+
     if (res.error) {
       if (res.error === "user_already_exists")
         setError("User with the given email already exists.");
       return;
     } else setSuccess(true);
-
-    setLoading(false);
 
     await fetch("/api/user/verify", {
       method: "POST",
