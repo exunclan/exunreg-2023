@@ -58,7 +58,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center" style={{height:"10vh",scale:1.25}}>
+      <div className="flex flex-col justify-center items-center" style={{height:"10vh",transform: "scale(1.25)"}}>
         <button
             className="my-2 bg-main p-2 rounded-md text-white"
             onClick={()=>{window.open("https://docs.google.com/document/u/6/d/e/2PACX-1vT1q_W-T6QnQLEm5B3onr7QDfLVOa5yglBAsPYbuA0JCHFQmQZDtteOpQNcn5eAm4ovhemXul6kxaII/pub","_blank")}}
