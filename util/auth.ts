@@ -50,20 +50,16 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }: any) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+    redirect: async ({ url, baseUrl }) =>{
+      return process.env.NEXT_PUBLIC_URL+"/dashboard"
     },
-    async jwt({ user, token }: any) {
+    jwt: async ({ user, token }: any) => {
       if (user) {
         token.user = user;
       }
       return token;
     },
-    async session({ session, token }: any) {
+    session: async ({ session, token }: any) => {
       session.user = token.user;
       return session;
     },

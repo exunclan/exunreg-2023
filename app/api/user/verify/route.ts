@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-    await fetch(`https://exun-mailer.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${false ? "Teacher In-charge " : ""}Verification`)}&html=${`
+    await fetch(`https://${process.env.RELAYER_API}.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${false ? "Teacher In-charge " : ""}Verification`)}&html=${`
     <p>
       Please click on the following link to verify your email for Exun 2023. <br><br> 
       <a href="${url}">
@@ -137,7 +137,7 @@ export async function POST(req: NextRequest) {
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-    await fetch(`https://exun-mailer.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${true ? "Teacher In-charge " : ""}Verification`)}&html=${`
+    await fetch(`https://${process.env.RELAYER_API}.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${true ? "Teacher In-charge " : ""}Verification`)}&html=${`
     <p>
       Please click on the following link to verify your email for Exun 2023. <br><br> 
       <a href="${url}">
