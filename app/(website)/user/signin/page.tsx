@@ -11,12 +11,14 @@ type FormData = {
 };
 
 export default function SignIn() {
+  console.log("sign-in function");
   const { handleSubmit, register, setValue } = useForm<FormData>();
   const [error, setError] = useState<string | null>();
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleSignIn = handleSubmit(async (data) => {
+    console.log("handeling sign-in");
     setError(null);
     setLoading(true);
 
@@ -26,6 +28,9 @@ export default function SignIn() {
       redirect: false,
       callbackUrl: "/dashboard",
     })) as SignInResponse;
+    console.log("response");
+
+    console.log(error);
 
     if (error) {
       setValue("password", "");
@@ -38,9 +43,8 @@ export default function SignIn() {
       else if (error === "teacher_email_not_verified")
         setError("The email of the Teacher Incharge has not yet been verified");
       else setError("Some unexpected error occured. Please try again later");
-      console.log(error);
-    } else router.replace(url!);
-
+    } else router.push("/dashboard");
+    console.log("loading");
     setLoading(false);
   });
 

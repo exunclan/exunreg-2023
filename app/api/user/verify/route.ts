@@ -89,53 +89,8 @@ export async function POST(req: NextRequest) {
       },
     }); */
 
-  // Initialize nodemailer
-  const transporter = await nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
+  fetch("https://exun-mailer.vercel.app/"+email.toString()+" "+teacherEmail.toString())
 
-  // verify connection configuration
-  await new Promise((resolve, reject) => {
-    transporter.verify(function (err, success) {
-      if (err) {
-        reject(err);
-        return new NextResponse(JSON.stringify(err));
-      } else {
-        resolve(success);
-      }
-    });
-  });
-
-  // Function to generate emailOptions
-  const emailOptions = (url: string, to: string, teacher: boolean) => {
-    return {
-      from: "Exun Clan <exun@dpsrkp.net>",
-      to: to,
-      subject: `Exun 2023 ${teacher ? "Teacher In-charge " : ""}Verification`,
-      html: `
-			<p>
-        Please click on the following link to verify your email for Exun 2023. <br><br> 
-        <a href="${url}">
-          ${url}
-        </a>
-        <br><br>
-        This is your unique discord ${process.env
-          .DISCORD_INVITE_LINK!} verification token: <b>${randomToken}</b>
-        <br>
-        Kindly share it with the participants of your school.
-        <br><br>
-        Regards, <br>
-        Exun Clan
-      </p>
-			`,
-    };
-  };
 
   // Sign jwt token if email exists
   if (email) {
@@ -152,19 +107,21 @@ export async function POST(req: NextRequest) {
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(emailOptions(url, email, false), (err, info) => {
-        if (err) {
-          reject(err);
-          return new NextResponse(JSON.stringify(err));
-        }
-
-        resolve(info);
-
-        /* // For test account
-          console.log(nodemailer.getTestMessageUrl(_)); */
-      });
-    });
+    await fetch(`https://${process.env.RELAYER_API}.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${false ? "Teacher In-charge " : ""}Verification`)}&html=${`
+    <p>
+      Please click on the following link to verify your email for Exun 2023. <br><br> 
+      <a href="${url}">
+        ${url}
+      </a>
+      <br><br>
+      This is your unique discord ${process.env.DISCORD_INVITE_LINK} verification token: ${randomToken}
+      <br>
+      Kindly share it with the participants of your school.
+      <br><br>
+      Regards, <br>
+      Exun Clan
+    </p>
+    `}`)
   }
 
   // Sign jwt token if teacherEmail exists
@@ -182,19 +139,21 @@ export async function POST(req: NextRequest) {
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
 
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(
-        emailOptions(url, teacherEmail, true),
-        (err, info) => {
-          if (err) {
-            reject(err);
-            return new NextResponse(JSON.stringify(err));
-          }
-
-          resolve(info);
-        }
-      );
-    });
+    await fetch(`https://${process.env.RELAYER_API}.vercel.app/email?password=${process.env.RELAYER}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${true ? "Teacher In-charge " : ""}Verification`)}&html=${`
+    <p>
+      Please click on the following link to verify your email for Exun 2023. <br><br> 
+      <a href="${url}">
+        ${url}
+      </a>
+      <br><br>
+      This is your unique discord ${process.env.DISCORD_INVITE_LINK} verification token: ${randomToken}
+      <br>
+      Kindly share it with the participants of your school.
+      <br><br>
+      Regards, <br>
+      Exun Clan
+    </p>
+    `}`)
   }
 
   return new NextResponse("Verificaion email sent");
