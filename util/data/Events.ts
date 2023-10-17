@@ -118,7 +118,7 @@ export const fetchEvents = async (): Promise<IEvent[]> => {
       newData.find((x) => x.name === "Hardware")!,
       newData.find((x) => x.name === "ExML")!,
       newData.find((x) => x.name === "Girls In Tech")!,
-      newData.find((x) => x.name === "SpaceTech")!,
+      //   newData.find((x) => x.name === "SpaceTech")!,
       newData.find((x) => x.name === "Group Discussion")!,
       newData.find((x) => x.name === "Surprise")!,
       newData.find((x) => x.name === "DomainSquare+ Gaming: PC")!,
