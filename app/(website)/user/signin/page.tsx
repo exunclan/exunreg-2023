@@ -27,6 +27,8 @@ export default function SignIn() {
       callbackUrl: "/dashboard",
     })) as SignInResponse;
 
+    console.log(error)
+
     if (error) {
       setValue("password", "");
       if (error === "account_not_found")
