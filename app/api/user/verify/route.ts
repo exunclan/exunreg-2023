@@ -104,6 +104,7 @@ export async function POST(req: NextRequest) {
         expiresIn: "24hr",
       }
     );
+    
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
     await fetch(`https://exun-mailer.vercel.app/email?password=${"Tejas%20yaha%20password%20nhi%20milega%20tujhe%20iska%20sorry"}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${false ? "Teacher In-charge " : ""}Verification`)}&html=${`
