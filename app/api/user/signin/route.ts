@@ -11,6 +11,8 @@ export async function POST(req: NextRequest) {
     email,
   });
 
+  console.log(user);
+
   if (!user) {
     return new NextResponse(
       JSON.stringify({
