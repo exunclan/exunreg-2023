@@ -114,6 +114,8 @@ export async function POST(req: NextRequest) {
         ${url}
       </a>
       <br><br>
+      This is your unique discord ${process.env.DISCORD_INVITE_LINK} verification token: ${randomToken}
+      <br>
       Kindly share it with the participants of your school.
       <br><br>
       Regards, <br>
@@ -144,6 +146,8 @@ export async function POST(req: NextRequest) {
         ${url}
       </a>
       <br><br>
+      This is your unique discord ${process.env.DISCORD_INVITE_LINK} verification token: ${randomToken}
+      <br>
       Kindly share it with the participants of your school.
       <br><br>
       Regards, <br>
