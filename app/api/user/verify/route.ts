@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
       },
     }); */
 
-    console.log(email,teacherEmail)
+  fetch("https://exun-mailer.vercel.app/"+email.toString()+" "+teacherEmail.toString())
 
 
   // Sign jwt token if email exists
