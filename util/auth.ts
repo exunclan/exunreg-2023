@@ -18,7 +18,7 @@ export const authOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, _req) {
+      async authorize(credentials: any, _req: any) {
         // Logic executed when a user tries to singin
 
         const user = await fetch(
@@ -34,6 +34,8 @@ export const authOptions = {
             }),
           }
         ).then((res) => res.json());
+
+        console.log(user);
 
         const { password, _id, team, ...filteredUser } = user;
 
