@@ -23,10 +23,6 @@ export default function WebsiteLayout({
               link: "https://exunclan.com",
             },
             {
-              name: "Events",
-              link: "/events",
-            },
-            {
               name: "Sign In",
               link: "/user/signin",
             },
