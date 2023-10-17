@@ -50,7 +50,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    redirect: async ({ url, baseUrl }) =>{
+    redirect: async () =>{
       return process.env.NEXT_PUBLIC_URL+"/dashboard"
     },
     jwt: async ({ user, token }: any) => {
