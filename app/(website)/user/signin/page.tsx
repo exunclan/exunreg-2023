@@ -38,6 +38,7 @@ export default function SignIn() {
       else if (error === "teacher_email_not_verified")
         setError("The email of the Teacher Incharge has not yet been verified");
       else setError("Some unexpected error occured. Please try again later");
+      console.log(error);
     } else router.replace(url!);
 
     setLoading(false);
