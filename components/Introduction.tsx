@@ -116,16 +116,16 @@ export default function Introduction({
           exciting cubing prizes.
         </p>
         <p>
-          Please check our{" "}
-          <a href="https://reg.exun.co/invite/events">Events</a> page for
-          details of the full spectrum of events Exun 2023 has to offer. Most
-          events will have preliminary rounds which will be conducted during the
-          Exun Week (October 30th - November 5th) while other events will fully
-          happen onsite on November 4-5, so be sure to check that out!
+          Please check our <a href="https://reg.exunclan.com/events">Events</a>{" "}
+          page for details of the full spectrum of events Exun 2023 has to
+          offer. Most events will have preliminary rounds which will be
+          conducted during the Exun Week (October 30th - November 5th) while
+          other events will fully happen onsite on November 4-5, so be sure to
+          check that out!
         </p>
       </div>
 
-      <div className="my-8" id="talks" ref={exunTalkRef}>
+      {/* <div className="my-8" id="talks" ref={exunTalkRef}>
         <h2>Exun Talks</h2>
         <p>
           Every year, we host a series of interactive webinars and talks during
@@ -149,7 +149,7 @@ export default function Introduction({
           <a href="https://exun.co/talkreg">exun.co/talkreg</a>. Keep checking
           our <a href="https://facebook.com/ExunClan">Facebook Page</a> as well!
         </p>
-      </div>
+      </div> */}
 
       <div className="my-8" id="prizes" ref={prizesRef}>
         <h2>Prizes &amp; Overall Trophy</h2>
@@ -300,7 +300,11 @@ export default function Introduction({
         <h2>Links, Platforms and Registration</h2>
         <p>
           We will be setting up an{" "}
-          <a href="//exun.co/discord" target="_blank" rel="noreferrer">
+          <a
+            href="https://discord.gg/cr8KtvuqEy"
+            target="_blank"
+            rel="noreferrer"
+          >
             Exun 2023 Discord server
           </a>{" "}
           which will serve as the primary mode of communication. Here, all
@@ -313,13 +317,13 @@ export default function Introduction({
         </p>
         <p>
           Registration can be done at{" "}
-          <a href="https://reg.exun.co/">reg.exun.co</a>. Only a single
-          representative needs to register on behalf of a team (if independent)
-          and school (if participating with your school), where they will have
-          to verify their emails and be verified by us to be legitimate
-          participants. They will then be notified of successful registration
-          and receive links and instructions for their group joining the Discord
-          server.
+          <a href="https://reg.exunclan.com/">reg.exunclan.com</a>. Only a
+          single representative needs to register on behalf of a team (if
+          independent) and school (if participating with your school), where
+          they will have to verify their emails and be verified by us to be
+          legitimate participants. They will then be notified of successful
+          registration and receive links and instructions for their group
+          joining the Discord server.
         </p>
         <p>
           Participants are strongly encouraged to complete registration at the

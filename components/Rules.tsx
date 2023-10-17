@@ -7,7 +7,7 @@ interface IRulesProps {
   regRulesRef: React.MutableRefObject<HTMLDivElement>;
   discordRulesRef: React.MutableRefObject<HTMLDivElement>;
   teacherRulesRef: React.MutableRefObject<HTMLDivElement>;
-  exunTalksRulesRef: React.MutableRefObject<HTMLDivElement>;
+  //   exunTalksRulesRef: React.MutableRefObject<HTMLDivElement>;
   prizesRulesRef: React.MutableRefObject<HTMLDivElement>;
 }
 
@@ -17,7 +17,7 @@ export default function Rules({
   regRulesRef,
   discordRulesRef,
   teacherRulesRef,
-  exunTalksRulesRef,
+  //   exunTalksRulesRef,
   prizesRulesRef,
 }: IRulesProps) {
   return (
@@ -78,8 +78,8 @@ export default function Rules({
           </li>
           <li>
             <strong>School Registration:</strong> Schools can register their
-            teams on <a href="https://reg.exun.co">reg.exun.co</a>. They are
-            also eligible to win the overall prize.
+            teams on <a href="https://reg.exunclan.com">reg.exunclan.com</a>.
+            They are also eligible to win the overall prize.
           </li>
           <li>
             <strong>Note:</strong> School registration is open for both Indian
@@ -147,7 +147,10 @@ export default function Rules({
           <ul>
             <li>
               We will be setting up an{" "}
-              <a href="https://exun.co/discord">Exun 2023 Discord server</a>.
+              <a href="https://discord.gg/cr8KtvuqEy">
+                Exun 2023 Discord server
+              </a>
+              .
             </li>
             <li>
               It is mandatory to join the server since it is the primary means
@@ -175,7 +178,7 @@ export default function Rules({
           </ul>
         </div>
 
-        <div className="my-8" id="talks-rules" ref={exunTalksRulesRef}>
+        {/* <div className="my-8" id="talks-rules" ref={exunTalksRulesRef}>
           <h2>Exun Talks Rules</h2>
           <p>
             Exun Week will include a special series of sessions called
@@ -220,7 +223,8 @@ export default function Rules({
               and other participants.
             </li>
           </ul>
-        </div>
+        </div> */}
+
         <div className="my-8" id="prizes-rules" ref={prizesRulesRef}>
           <h2>Prizes & Overall Trophy Rules</h2>
 
