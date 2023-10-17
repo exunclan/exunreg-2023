@@ -6,6 +6,7 @@ import { fetchEvents, Images, Groups } from "@/util/data/Events";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "@/components/Loading";
 import Error from "@/components/Error";
+import Image from "next/image";
 
 export default function HomePage() {
   const {
@@ -33,10 +34,18 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <div className="h-[75vh] w-full flex flex-col justify-center items-center">
-        <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
-          The biggest tech symposium of India
+        <div className="flex md:flex-col flex-col-reverse justify-center items-center">
+          <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
+            The biggest tech symposium of India
+          </div>
+          <Image
+            src="/illustration.png"
+            alt="Illustration"
+            width="400"
+            height="400"
+            className="w-40 sm:w-[400px]"
+          />
         </div>
-        <div className="flex-1 bg-red"> {/* illustration */}</div>
         <div className="text-accent-light text-sm sm:text-lg max-w-xs sm:max-w-3xl text-center">
           Exun 2023, a plethora of events and a profusion of memories, awaits
           you. The 28th iteration of Exun Clan's annual international technology
