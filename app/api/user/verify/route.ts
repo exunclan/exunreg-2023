@@ -89,6 +89,9 @@ export async function POST(req: NextRequest) {
       },
     }); */
 
+    console.log(email,teacherEmail)
+
+
   // Sign jwt token if email exists
   if (email) {
     let token = jwt.sign(
