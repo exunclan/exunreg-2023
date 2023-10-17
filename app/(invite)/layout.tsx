@@ -18,10 +18,6 @@ export default function InviteLayout({
               link: "/invite",
             },
             {
-              name: "Glossary",
-              link: "/invite/glossary",
-            },
-            {
               name: "Events",
               link: "/invite/events",
             },

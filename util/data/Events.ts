@@ -37,19 +37,23 @@ export const Images: { [key: string]: string } = {
 export const Groups: { [key: string]: { name: string; summary: string } } = {
   ds: {
     name: "DomainSquare+",
-    summary: "",
+    summary:
+      "DomainSquare+, the esteemed gaming society of Delhi Public School R. K. Puram, India s pioneer in gaming excellence. Over the years, DomainSquare+ has left an indelible mark on the gaming landscape of Delhi Public School R. K. Puram and beyond, and this year we present to you 3 thrilling gaming related events ranging from classic PC gaming to a gaming Quiz, making sure there's something for every type of gamer at heart.",
   },
   build: {
     name: "Build",
-    summary: "",
+    summary:
+      "Build is the cumulatory Creative event of the entire symposium. Divided into 3 subcategories (Designathon, Hackathon and Unreality), it epitomizes the power of teamwork and collaboration as participants come together to conceive and develop projects from scratch.    ",
   },
   rk: {
     name: "RoboKnights",
-    summary: "",
+    summary:
+      "Roboknights, the robotics club of DPS RK Puram, is a space for students interested in robotics, mechanics, and electrical engineering to share their creations. With 2 thrilling events testing the limits of human creativity and practicality, we are sure you will have an excellent experience. ",
   },
   cubxl: {
     name: "CubXL",
-    summary: "",
+    summary:
+      "CubXL, the cubing club of DPS RK Puram, is a haven for all those that wish to sharpen up their skills in the classic Rubix Cube and its variations. With 4 cubing events this year, ranging from the classic 3x3 to a surprise cubing contest, this year's contests are guaranteed to be spectacular. ",
   },
 };
 
