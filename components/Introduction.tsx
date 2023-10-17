@@ -94,7 +94,7 @@ export default function Introduction({
           fields like Machine Learning (ExML), Computational Linguistics (Turing
           Test), and Competitive Programming (CP).
         </p>
-        <p>
+        {/* <p>
           Are you interested in some other kinds of events as well? With our
           wide array of options, we&apos;ve got you covered! We have the Girls
           in Tech event, where participants will learn a new technical skill
@@ -103,6 +103,13 @@ export default function Introduction({
           interesting practical applications of engineering and problem solving
           in space scenarios. We also have the Quiz, Crossword, and Surprise
           events for the inquisitive.
+        </p> */}
+        <p>
+          Are you interested in some other kinds of events as well? With our
+          wide array of options, we&apos;ve got you covered! We have the Girls
+          in Tech event, where participants will learn a new technical skill
+          through workshops and then participate in a contest. We also have the
+          Quiz, Crossword, and Surprise events for the inquisitive.
         </p>
         <p>
           We have also teamed up with other clubs in our school to offer you a
@@ -116,12 +123,12 @@ export default function Introduction({
           exciting cubing prizes.
         </p>
         <p>
-          Please check our <a href="https://reg.exunclan.com/events">Events</a>{" "}
-          page for details of the full spectrum of events Exun 2023 has to
-          offer. Most events will have preliminary rounds which will be
-          conducted during the Exun Week (October 30th - November 5th) while
-          other events will fully happen onsite on November 4-5, so be sure to
-          check that out!
+          Please check our{" "}
+          <a href="https://reg.exunclan.com/invite/events">Events</a> page for
+          details of the full spectrum of events Exun 2023 has to offer. Most
+          events will have preliminary rounds which will be conducted during the
+          Exun Week (October 30th - November 5th) while other events will fully
+          happen onsite on November 4-5, so be sure to check that out!
         </p>
       </div>
 
@@ -270,10 +277,15 @@ export default function Introduction({
           “<strong>independent participation</strong>”) with a customized team
           name.
         </p>
-        <p>
+        {/* <p>
           Independent participation will only be allowed for events that will be
           completely online, i.e., Sudocrypt v13.0, SpaceTech, ExML, Turing
           Test, Build: Unreality, and Competitive Programming Prelims.
+        </p> */}
+        <p>
+          Independent participation will only be allowed for events that will be
+          completely online, i.e., Sudocrypt v13.0, ExML, Turing Test, Build:
+          Unreality, and Competitive Programming Prelims.
         </p>
         <p>
           Points won by teams and individuals under school participation will be
