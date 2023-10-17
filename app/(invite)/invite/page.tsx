@@ -142,7 +142,7 @@ export default function LayoutPage() {
               <div className="w-full h-full flex flex-col items-stretch justify-center">
                 <h1 className="text-main text-5xl font-extrabold">Exun 2023</h1>
                 <p className="text-xl text-type-light">
-                  Raising the bar once again
+                  Unique Events - Unique Memories
                 </p>
               </div>
             </div>
