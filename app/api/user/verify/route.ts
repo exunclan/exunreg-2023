@@ -88,9 +88,31 @@ export async function POST(req: NextRequest) {
       },
     }); */
 
-  // Initialize nodemailer
 
   // Function to generate emailOptions
+  const emailOptions = (url: string, to: string, teacher: boolean) => {
+    return {
+      from: "Exun Clan <exun@dpsrkp.net>",
+      to: to,
+      subject: `Exun 2023 ${teacher ? "Teacher In-charge " : ""}Verification`,
+      html: `
+			<p>
+        Please click on the following link to verify your email for Exun 2023. <br><br> 
+        <a href="${url}">
+          ${url}
+        </a>
+        <br><br>
+        This is your unique discord ${process.env
+          .DISCORD_INVITE_LINK!} verification token: <b>${randomToken}</b>
+        <br>
+        Kindly share it with the participants of your school.
+        <br><br>
+        Regards, <br>
+        Exun Clan
+      </p>
+			`,
+    };
+  };
 
   // Sign jwt token if email exists
   if (email) {
@@ -104,9 +126,9 @@ export async function POST(req: NextRequest) {
         expiresIn: "24hr",
       }
     );
-    
 
     const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
+
     await fetch(`https://exun-mailer.vercel.app/email?password=${"Tejas%20yaha%20password%20nhi%20milega%20tujhe%20iska%20sorry"}&to=${encodeURIComponent(email)}&subject=${encodeURIComponent(`Exun 2023 ${false ? "Teacher In-charge " : ""}Verification`)}&html=${`
     <p>
       Please click on the following link to verify your email for Exun 2023. <br><br> 
@@ -123,36 +145,6 @@ export async function POST(req: NextRequest) {
       Exun Clan
     </p>
     `}`)
-  }
-
-  // Sign jwt token if teacherEmail exists
-  if (teacherEmail) {
-    let token = jwt.sign(
-      {
-        email: teacherEmail,
-        emailType: "teacher",
-      },
-      process.env.JWT_SECRET!,
-      {
-        expiresIn: "24hr",
-      }
-    );
-
-    const url = `${process.env.NEXT_PUBLIC_URL}/api/user/verify?token=${token}`;
-
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(
-        emailOptions(url, teacherEmail, true),
-        (err, info) => {
-          if (err) {
-            reject(err);
-            return new NextResponse(JSON.stringify(err));
-          }
-
-          resolve(info);
-        }
-      );
-    });
   }
 
   return new NextResponse("Verificaion email sent");
