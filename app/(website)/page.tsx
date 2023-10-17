@@ -58,7 +58,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="justify-center items-center mt-[4rem] m-8" style={{width:"100vw",height:"100vh"}}>
+      <div className="justify-center items-center mt-[1rem]" style={{width:"100vw",height:"100vh"}}>
         <iframe src="https://docs.google.com/document/u/6/d/e/2PACX-1vT1q_W-T6QnQLEm5B3onr7QDfLVOa5yglBAsPYbuA0JCHFQmQZDtteOpQNcn5eAm4ovhemXul6kxaII/pub" style={{width:"100vw",height:"100vh"}}></iframe>
       </div>
     </>
