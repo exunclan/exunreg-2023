@@ -26,7 +26,7 @@ export default function LayoutPage() {
   const [regRulesRef, scrollToRegRulesRef] = useScroll();
   const [teacherRulesRef, scrollToTeacherRulesRef] = useScroll();
   const [discordRulesRef, scrollToDiscordRulesRef] = useScroll();
-  const [exunTalksRulesRef, scrollToExunTalksRulesRef] = useScroll();
+  //   const [exunTalksRulesRef, scrollToExunTalksRulesRef] = useScroll();
   const [prizesRulesRef, scrollToPrizesRulesRef] = useScroll();
 
   const {
@@ -62,7 +62,7 @@ export default function LayoutPage() {
                 {[
                   { label: "Introduction", scroll: scrollToIntroductionRef },
                   { label: "Events", scroll: scrollToEventsRef },
-                  { label: "Exun Talks", scroll: scrollToExunTalkRef },
+                  //   { label: "Exun Talks", scroll: scrollToExunTalkRef },
                   {
                     label: "Prizes &amp; Overall Trophy",
                     scroll: scrollToPrizesRef,
@@ -116,10 +116,10 @@ export default function LayoutPage() {
                     label: "Discord Server Rules",
                     scroll: scrollToDiscordRulesRef,
                   },
-                  {
-                    label: "Exun Talks Rules",
-                    scroll: scrollToExunTalksRulesRef,
-                  },
+                  //   {
+                  //     label: "Exun Talks Rules",
+                  //     scroll: scrollToExunTalksRulesRef,
+                  //   },
                   {
                     label: "Prizes &amp; Overall Trophy Rules",
                     scroll: scrollToPrizesRulesRef,
@@ -168,7 +168,7 @@ export default function LayoutPage() {
               regRulesRef={regRulesRef}
               teacherRulesRef={teacherRulesRef}
               discordRulesRef={discordRulesRef}
-              exunTalksRulesRef={exunTalksRulesRef}
+              //   exunTalksRulesRef={exunTalksRulesRef}
               prizesRulesRef={prizesRulesRef}
             />
           </div>
