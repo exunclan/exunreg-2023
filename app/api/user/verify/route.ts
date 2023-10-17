@@ -73,6 +73,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   // Get email, teacherEmail
   const { email, teacherEmail } = await req.json();
+  const tokens = JSON.parse(process.env.DISCORD_VERIFICATION_TOKENS || "[]");
+  const randomToken = tokens[Math.floor(Math.random() * tokens.length)];
 
   /* // Test account for nodemailer
   // Don't forget to uncomment the closing parenthesis on the createTestAccount function
@@ -112,14 +114,10 @@ export async function POST(req: NextRequest) {
 
   // Function to generate emailOptions
   const emailOptions = (url: string, to: string, teacher: boolean) => {
-    const tokens = JSON.parse(process.env.DISCORD_VERIFICATION_TOKENS || "[]");
-    const randomToken = tokens[Math.floor(Math.random() * tokens.length)];
-    console.log(randomToken);
-
     return {
       from: "Exun Clan <exun@dpsrkp.net>",
       to: to,
-      subject: `Exun 2023 ${teacher ? "Teacher In-charge" : ""}Verification`,
+      subject: `Exun 2023 ${teacher ? "Teacher In-charge " : ""}Verification`,
       html: `
 			<p>
         Please click on the following link to verify your email for Exun 2023. <br><br> 
@@ -127,11 +125,13 @@ export async function POST(req: NextRequest) {
           ${url}
         </a>
         <br><br>
-        ${
-          teacher
-            ? `Discord server verification token: <b>${randomToken}</b>`
-            : ""
-        }
+        This is your unique discord ${process.env
+          .DISCORD_INVITE_LINK!} verification token: <b>${randomToken}</b>
+        <br>
+        Kindly share it with the participants of your school.
+        <br><br>
+        Regards, <br>
+        Exun Clan
       </p>
 			`,
     };
