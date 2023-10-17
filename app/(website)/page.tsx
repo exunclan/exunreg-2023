@@ -9,27 +9,6 @@ import Error from "@/components/Error";
 import Image from "next/image";
 
 export default function HomePage() {
-  const {
-    isLoading,
-    data: Events,
-    error,
-  } = useQuery({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
-  });
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!Events || error) {
-    return <Error />;
-  }
-
-  const groupEvents = Events.filter((x) => !!x.group);
-  const groups = Array.from(new Set(groupEvents.map((x) => x.group)));
-  const filteredEvents = Events.filter((x) => !x.group);
-
   return (
     <>
       {/* Hero */}
