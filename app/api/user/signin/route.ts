@@ -10,6 +10,9 @@ export async function POST(req: NextRequest) {
   const user = await db.collection("users").findOne({
     email,
   });
+  console.log(user)
+
+  console.log(user);
 
   if (!user) {
     return new NextResponse(

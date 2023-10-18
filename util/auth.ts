@@ -18,7 +18,7 @@ export const authOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, _req) {
+      async authorize(credentials: any, _req: any) {
         // Logic executed when a user tries to singin
 
         const user = await fetch(
@@ -35,6 +35,8 @@ export const authOptions = {
           }
         ).then((res) => res.json());
 
+        console.log(user);
+
         const { password, _id, team, ...filteredUser } = user;
 
         if (!user.error) {
@@ -50,20 +52,16 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }: any) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+    redirect: async () =>{
+      return process.env.NEXT_PUBLIC_URL+"/dashboard"
     },
-    async jwt({ user, token }: any) {
+    jwt: async ({ user, token }: any) => {
       if (user) {
         token.user = user;
       }
       return token;
     },
-    async session({ session, token }: any) {
+    session: async ({ session, token }: any) => {
       session.user = token.user;
       return session;
     },

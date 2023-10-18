@@ -73,8 +73,16 @@ export default function SignIn() {
       ) : (
         <form
           onSubmit={handleSignIn}
-          className="flex flex-col justify-start w-[80vw] md:w-1/3"
+          className="my-2 flex flex-col justify-start w-[80vw] md:w-1/3"
         >
+          <div className="text-accent-light self-end text-xs md:text-sm my-1">
+            Click here for{" "}
+            <span className="border-b border-dashed">
+              <a href="https://exun.co/independentreg">
+                Independent Registration
+              </a>
+            </span>
+          </div>
           {error && (
             <div className="bg-red-500 text-white p-3 rounded-md text-md">
               {error}

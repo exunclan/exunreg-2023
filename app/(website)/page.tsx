@@ -9,31 +9,10 @@ import Error from "@/components/Error";
 import Image from "next/image";
 
 export default function HomePage() {
-  const {
-    isLoading,
-    data: Events,
-    error,
-  } = useQuery({
-    queryKey: ["events"],
-    queryFn: fetchEvents,
-  });
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!Events || error) {
-    return <Error />;
-  }
-
-  const groupEvents = Events.filter((x) => !!x.group);
-  const groups = Array.from(new Set(groupEvents.map((x) => x.group)));
-  const filteredEvents = Events.filter((x) => !x.group);
-
   return (
     <>
       {/* Hero */}
-      <div className="h-[75vh] w-full flex flex-col justify-center items-center">
+      <div className="w-full flex flex-col justify-center items-center">
         <div className="flex md:flex-col flex-col-reverse justify-center items-center">
           <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
             The biggest tech symposium of India
@@ -58,154 +37,18 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Event Cards - Desktop */}
-      <div className="hidden mt-[10rem] m-8 lg:flex flex-col justify-center items-center">
-        <Row>
-          <HeaderCard />
-          <Column>
-            <Row>
-              <Card
-                Events={Events}
-                text="Sudocrypt"
-                image="/sudocrypt.svg"
-                className="rounded-b-max"
-              />
-              <Card
-                Events={Events}
-                text="Turing Test"
-                image="/Turing.svg"
-                className="rounded-b-max"
-              />
-              <Card
-                Events={Events}
-                text="ExML"
-                image="/exML.svg"
-                className="rounded-se-max rounded-es-max"
-              />
-            </Row>
-            <Row>
-              <Card
-                Events={Events}
-                text="Group Discussion"
-                image="/GD.svg"
-                className="rounded-max"
-              />
-              <Card
-                Events={Events}
-                text="Build"
-                image="/Build.svg"
-                className="rounded-l-max"
-                long
-              />
-            </Row>
-          </Column>
-        </Row>
-        <Row>
-          <Card
-            Events={Events}
-            text="Competitive Programming"
-            image="/CP.svg"
-            className="rounded-r-max"
-          />
-          <Card
-            Events={Events}
-            text="RoboKnights"
-            image="/robotics.svg"
-            className="rounded-max"
-          />
-          <Card
-            Events={Events}
-            text="Audio Production"
-            image="/audio.png"
-            className="rounded-max"
-          />
-          <Card
-            Events={Events}
-            text="Hardware"
-            image="/hardware.svg"
-            className="rounded-l-max"
-          />
-        </Row>
-        <Row>
-          <Column>
-            <Card
-              Events={Events}
-              text="Surprise"
-              image="/surprise.svg"
-              className="rounded-r-max"
-              long
-            />
-            <Row>
-              <Card
-                Events={Events}
-                text="Crossword"
-                image="cross.svg"
-                className="rounded-se-max rounded-es-max"
-              />
-              <Card
-                Events={Events}
-                text="Girls In Tech"
-                image="girls in tech.svg"
-                className="rounded-t-max"
-              />
-            </Row>
-          </Column>
-          <Column>
-            <Row>
-              <Card
-                Events={Events}
-                text="DomainSquare+"
-                image="/gaming.svg"
-                className="rounded-max"
-              />
-              <Card
-                Events={Events}
-                text="Junior Quiz"
-                image="/junior quiz.svg"
-                className="rounded-l-max"
-              />
-            </Row>
-            <Row>
-              <Card
-                Events={Events}
-                text="Quiz"
-                image="/open quiz.svg"
-                className="rounded-t-max"
-              />
-              <Card
-                Events={Events}
-                text="CubXL"
-                image="/cubxl.svg"
-                className="rounded-ss-max rounded-ee-max"
-              />
-            </Row>
-          </Column>
-        </Row>
-      </div>
-
-      {/* Event Cards - Mobile */}
-      <div className="lg:hidden flex flex-col justify-center items-center mt-[10rem] m-8">
-        <HeaderCard />
-        <div className="flex flex-row flex-wrap justify-center items-center ">
-          {groups.map((name, i) => (
-            <Card
-              Events={Events}
-              key={i}
-              text={Groups[name].name}
-              image={Images[name]}
-              className="rounded-2xl"
-            />
-          ))}
-          {filteredEvents.map(({ name, image }, i) => (
-            <Card
-              Events={Events}
-              key={i}
-              text={name}
-              image={image}
-              className="rounded-2xl"
-            />
-          ))}
-        </div>
+      <div className="flex flex-col justify-center items-center">
+        <button
+          className="my-2 mt-10 bg-main p-3 text-md rounded-md text-white"
+          onClick={() => {
+            window.open(
+              "https://docs.google.com/document/u/6/d/e/2PACX-1vT1q_W-T6QnQLEm5B3onr7QDfLVOa5yglBAsPYbuA0JCHFQmQZDtteOpQNcn5eAm4ovhemXul6kxaII/pub",
+              "_blank"
+            );
+          }}
+        >
+          Event Details
+        </button>
       </div>
     </>
   );
