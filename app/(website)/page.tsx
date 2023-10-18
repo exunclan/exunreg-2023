@@ -39,7 +39,7 @@ export default function HomePage() {
 
       <div className="flex flex-col justify-center items-center">
         <button
-          className="my-2 mb-10 bg-main p-3 text-md rounded-md text-white"
+          className="my-2 mt-10 bg-main p-3 text-md rounded-md text-white"
           onClick={() => {
             window.open(
               "https://docs.google.com/document/u/6/d/e/2PACX-1vT1q_W-T6QnQLEm5B3onr7QDfLVOa5yglBAsPYbuA0JCHFQmQZDtteOpQNcn5eAm4ovhemXul6kxaII/pub",
