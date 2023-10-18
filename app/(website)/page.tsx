@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <div className="h-[75vh] w-full flex flex-col justify-center items-center">
+      <div className="w-full flex flex-col justify-center items-center">
         <div className="flex md:flex-col flex-col-reverse justify-center items-center">
           <div className="text-main text-center text-3xl sm:text-5xl font-semibold m-4">
             The biggest tech symposium of India
@@ -39,7 +39,7 @@ export default function HomePage() {
 
       <div className="flex flex-col justify-center items-center">
         <button
-          className="my-2 bg-main p-2 rounded-md text-white"
+          className="my-2 mb-10 bg-main p-3 text-md rounded-md text-white"
           onClick={() => {
             window.open(
               "https://docs.google.com/document/u/6/d/e/2PACX-1vT1q_W-T6QnQLEm5B3onr7QDfLVOa5yglBAsPYbuA0JCHFQmQZDtteOpQNcn5eAm4ovhemXul6kxaII/pub",
