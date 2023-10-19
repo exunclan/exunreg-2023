@@ -85,6 +85,15 @@ export default function SignIn() {
         </div>
 
         <div className="text-accent-light self-end text-xs md:text-sm my-1">
+          <span className="border-b border-dashed">
+            <a href="https://exun.co/independentreg" target="_blank">
+              Register
+            </a>{" "}
+          </span>
+          independently?
+        </div>
+
+        <div className="text-accent-light self-end text-xs md:text-sm my-1">
           Forgot Password?{" "}
           <span className="border-b border-dashed">
             <a href="/user/forgot">Reset it.</a>
