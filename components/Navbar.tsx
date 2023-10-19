@@ -28,7 +28,7 @@ export default function Navbar({ Links }: { Links: Link[] }) {
       <div className="hidden sm:flex flex-row justify-between p-8 items-center">
         <a href="/">
           <Image
-            src="/logo.png"
+            src="https://exunclan.com/_ipx/w_185,q_74/%2Flogo.png?url=%2Flogo.png"
             alt="Exun Clan"
             width="185"
             height="74"
