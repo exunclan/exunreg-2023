@@ -10,7 +10,10 @@ export default async function DashboardEventTeamsPage({
   params: { event: string };
 }) {
   console.log(params.event);
-  const event = params.event.replaceAll("%20", " ").replaceAll("%2B", "+");
+  const event = params.event
+    .replaceAll("%20", " ")
+    .replaceAll("%2B", "+")
+    .replaceAll("%3A", ":");
   const session = await getServerSession(authOptions);
 
   const team = await fetch(

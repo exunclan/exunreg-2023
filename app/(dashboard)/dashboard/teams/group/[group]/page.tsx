@@ -46,7 +46,8 @@ export default function DashboardEventTeamsPage({
             key={i}
             link={`/dashboard/teams/${name
               .replaceAll("+", "%2B")
-              .replaceAll(" ", "%20")}`}
+              .replaceAll(" ", "%20")
+              .replaceAll("%3A", ":")}`}
             image={image}
             name={name}
             summary={summary}
