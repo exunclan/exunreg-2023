@@ -25,8 +25,12 @@ export default async function DashboardEventTeamsPage({
 
   return (
     <Column className="m-3">
-      <div className="text-main text-4xl font-semibold text-center m-6">
+      <div className="text-main text-4xl font-semibold text-center mx-6 mt-6 mb-2">
         {event} Team
+      </div>
+      <div className="text-accent-light text-lg mb-4">
+        You are responsible for any incorrect data entered. Your data might be
+        shared with our sponsors for reference purposes.
       </div>
       <TeamData event={event} team={team} userId={session?.user?.id} />
     </Column>
