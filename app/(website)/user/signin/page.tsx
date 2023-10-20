@@ -87,7 +87,7 @@ export default function SignIn() {
         <div className="text-accent-light self-end text-xs md:text-sm my-1">
           <span className="border-b border-dashed">
             <a href="https://exun.co/independentreg" target="_blank">
-              Register
+              Registering
             </a>{" "}
           </span>
           independently?
