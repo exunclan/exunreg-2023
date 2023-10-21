@@ -151,10 +151,15 @@ export default function Member({
             </div>
 
             <div className="flex flex-col my-3">
-              <label className="text-sm text-accent">Phone</label>
+              <label className="text-sm text-accent">Mobile</label>
+              <div className="text-accent-light text-xs">
+                Participant's or their parent's Mobile Number
+              </div>
               <input
                 required
                 className="border border-sub rounded-md p-2 text-accent-light"
+                type="tel"
+                pattern="[0-9]{10}"
                 {...register("phone")}
               />
             </div>
