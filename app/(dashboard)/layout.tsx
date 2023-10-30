@@ -37,12 +37,14 @@ export default function DashboardLayout({
         <SessionProvider>
           {/* <div className="flex-1">{children}</div> */}
           <div className="flex-1">
-            <div className="text-3xl text-main m-3 font-bold">
-              Registrations closed.
-            </div>
-            <div className="text-xl text-accent m-3 font-bold">
-              If you wish to make any changes to your registration, please email
-              us at exun@dpsrkp.net.
+            <div className="flex flex-col justify-center items-center">
+              <div className="text-3xl text-main m-3 font-bold">
+                Registrations closed.
+              </div>
+              <div className="text-xl text-accent m-3">
+                If you wish to make any changes to your registration, please
+                email us at exun@dpsrkp.net
+              </div>
             </div>
           </div>
         </SessionProvider>
